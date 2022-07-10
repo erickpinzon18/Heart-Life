@@ -1,7 +1,21 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="bd.Conexion"%>
 <%
     if(session.getAttribute("user") == null) {
         response.sendRedirect("../index.jsp");
     }
+    
+//Relleno de datos
+                    Conexion c = new Conexion();
+                    String user = (String) session.getAttribute("user");
+                    String sql = "SELECT nContacto, nombre, email, direc, numero FROM emergencyContacts WHERE user = '"+user+"'";
+                    String nombre = null, email = null, direc = null, numero = null;
+                    int nContacto = 0;
+                    try {
+                        c.conectar();
+                        c.rs = c.smt.executeQuery(sql);
+                        
 %>
 <!doctype html>
 <html lang="en">
@@ -19,7 +33,6 @@
           rel="stylesheet">
 </head>
 <body>
-
 <div>
 
     <!-- Page Wrapper -->
@@ -186,62 +199,45 @@
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Email</th>
-                                        <th>Dirección</th>
-                                        <th>Número</th>
+                                        <th>Direccion</th>
+                                        <th>Numero</th>
                                         <th>Acciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Thomas Hardy</td>
-                                        <td>thomashardy@mail.com</td>
-                                        <td>89 Chiaroscuro Rd, Portland, USA</td>
-                                        <td>(171) 555-2222</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dominique Perrier</td>
-                                        <td>dominiqueperrier@mail.com</td>
-                                        <td>Obere Str. 57, Berlin, Germany</td>
-                                        <td>(313) 555-5735</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>mariaanders@mail.com</td>
-                                        <td>25, rue Lauriston, Paris, France</td>
-                                        <td>(503) 555-9931</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fran Wilson</td>
-                                        <td>franwilson@mail.com</td>
-                                        <td>C/ Araquil, 67, Madrid, Spain</td>
-                                        <td>(204) 619-5731</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Martin Blank</td>
-                                        <td>martinblank@mail.com</td>
-                                        <td>Via Monte Bianco 34, Turin, Italy</td>
-                                        <td>(480) 631-2097</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
+                                    <%
+                                        if (c.rs != null) {
+                                                while (c.rs.next()) {
+                                                    nContacto = c.rs.getInt("nContacto");
+                                                    nombre = c.rs.getString("nombre");
+                                                    email = c.rs.getString("email");
+                                                    direc = c.rs.getString("direc");
+                                                    numero = c.rs.getString("numero");
+                                    %>
+                                        <tr>
+                                            <td style="display: none;"> <p id="nContacto"><%=nombre%></p></td>
+                                            <td> <p id="name<%=nContacto%>"><%=nombre%></p></td>
+                                            <td> <p id="email<%=nContacto%>"><%=email%></p></td>
+                                            <td> <p id="direc<%=nContacto%>"><%=direc%></p></td>
+                                            <td> <p id="num<%=nContacto%>"><%=numero%></p></td>
+                                            <td>
+                                                <a type="button" class="btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit" 
+                                                    onclick="editContact(<%=nContacto%>)">
+                                                   Editar
+                                                </a>
+                                                <a type="button" class="btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                    Borrar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <%
+                                                }
+                                            }
+                                            c.desconectar();
+                                        } catch (SQLException ex) {
+                                            System.out.println("Error al insertar contacto de emergencia "+ ex +" | SQL: "+ sql);
+                                        }  
+                                    %>
                                     </tbody>
                                 </table>
                             </div>
@@ -249,156 +245,78 @@
                     </div>
                 </div>
             </div>
-            <!-- End of Content Wrapper -->
         </div>
     </div>
-
-
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Appointment Informations</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
-                </button>
+                <h5 class="modal-title" id="staticBackdropLabel">Modificar Contacto de Emergencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row g-0">
-                    <div class="col-md-8 border-right">
-                        <div class="status p-3">
-                            <table class="table table-borderless">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Hospital</span>
-                                            <span class="subheadings">Cairo Hospital</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Time/Date</span>
-                                            <span class="subheadings">5:00PM 3-12-2020</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Status</span>
-                                            <span class="subheadings"><i class="dots"></i> Booked</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Speciality</span>
-                                            <span class="subheadings">Dental Clinic</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Referring Doctor</span>
-                                            <span class="subheadings">Dr. Harry Pimn</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Contact</span>
-                                            <span class="subheadings">52, Maria Block, Victoria Road, CA USA</span>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Reason of visiting</span>
-                                            <span class="subheadings">Lorem ipsum is placeholder text commonly used in the graphic, print.</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Direction</span>
-                                            <span class="d-block subheadings">Get direction by using</span>
-                                            <span class="d-flex flex-row">
-                                        <img src="https://img.icons8.com/color/100/000000/google-maps.png" class="rounded" width="30" />
-                                        <img src="https://img.icons8.com/color/100/000000/pittsburgh-map.png" class="rounded" width="30" />
-                                    </span>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Hospital Gallary</span>
-                                            <span class="d-flex flex-row gallery">
-                                        <img src="https://i.imgur.com/VfRSLTm.jpg" width="50" class="rounded">
-                                        <img src="https://i.imgur.com/jb9Cy5h.jpg" width="50" class="rounded">
-                                        <img src="https://i.imgur.com/vBUz4HA.jpg" width="50" class="rounded">
-                                    </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-2 text-center">
-                            <div class="profile">
-                                <img src="https://i.imgur.com/VfRSLTm.jpg" width="100" class="rounded-circle img-thumbnail">
-                                <span class="d-block mt-3 font-weight-bold">Dr. Samsung Philip.</span>
-                            </div>
-                            <div class="about-doctor">
-                                <table class="table table-borderless">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Education</span>
-                                                <span class="subheadings">University of Harward</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Language</span>
-                                                <span class="subheadings">Spanish, English</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Organisation</span>
-                                                <span class="subheadings">Accupunture</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Specialist</span>
-                                                <span class="subheadings">Accupunture</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <input type="text" name="name" id="nameModal" class="form-control">             
                 </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input type="text" name="email" id="emailModal" class="form-control">             
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Direccion</label>
+                    <input type="text" name="direc" id="direcModal" class="form-control">             
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Numero</label>
+                    <input type="text" name="num" id="numModal" class="form-control">             
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal Eliminar -->
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+    function editContact(id) {
+        $("#nameModal").val($("#name"+id).text());
+        $("#emailModal").val($("#email"+id).text());
+        $("#direcModal").val($("#direc"+id).text());
+        $("#numModal").val($("#num"+id).text());
+        //$("#userAlert").html(result);
+    }    
+</script>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+            
+</script>
+
 </body>
 </html>

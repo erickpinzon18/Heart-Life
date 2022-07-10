@@ -8,7 +8,6 @@
 
 //Relleno de datos
                     Conexion c = new Conexion();
-                    ResultSet rsG, rsU;
                     String user = (String) session.getAttribute("user");
                     String sql = "SELECT nombre, fec_nac, correo FROM user WHERE user = '"+user+"'";
                     String nombre = null, fec_nac = null, correo = null;
