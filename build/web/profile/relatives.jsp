@@ -1,0 +1,404 @@
+<%
+    if(session.getAttribute("user") == null) {
+        response.sendRedirect("../index.jsp");
+    }
+%>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Proyecto Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet"
+          href=" https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css ">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="../assets/css/themeStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+</head>
+<body>
+
+<div>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">HEART-LIFE</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="general.jsp">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>General</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Emergencia
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="emergencyContacts.jsp">
+                    <i class="fas fa-fw fa-phone"></i>
+                    <span>Contactos Emergencia</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="relatives.jsp">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Familiares Cercanos</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Extras
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="security.jsp">
+                    <i class="fas fa-fw fa-lock"></i>
+                    <span>Seguridad</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="fas fa-fw fa-random"></i>
+                    <span>Otros</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Topbar Search -->
+                    <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+                                <img class="img-profile rounded-circle" src="https://img.icons8.com/ios/50/undefined/user--v1.png">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                <div class="container">
+                    <div class="container-xl">
+                        <div class="table-responsive">
+                            <div class="table-wrapper">
+                                <div class="table-title">
+                                    <div class="row">
+                                        <div class="col-sm-8 text-danger">
+                                            <h2>Administrar <b>Familiares Cercanos</b></h2>
+                                        </div>
+                                        <div class="col-sm-4 text-right">
+                                            <a href="#addModal" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i class="material-icons"></i> <span>Agregar</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Parentezco</th>
+                                        <th>Dirección</th>
+                                        <th>Número</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Thomas Hardy</td>
+                                        <td>Father</td>
+                                        <td>89 Chiaroscuro Rd, Portland, USA</td>
+                                        <td>(171) 555-2222</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dominique Perrier</td>
+                                        <td>Mom</td>
+                                        <td>Obere Str. 57, Berlin, Germany</td>
+                                        <td>(313) 555-5735</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maria Anders</td>
+                                        <td>Sister</td>
+                                        <td>25, rue Lauriston, Paris, France</td>
+                                        <td>(503) 555-9931</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fran Wilson</td>
+                                        <td>Brother</td>
+                                        <td>C/ Araquil, 67, Madrid, Spain</td>
+                                        <td>(204) 619-5731</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Martin Blank</td>
+                                        <td>Cousin</td>
+                                        <td>Via Monte Bianco 34, Turin, Italy</td>
+                                        <td>(480) 631-2097</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
+                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Content Wrapper -->
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Appointment Informations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-0">
+                    <div class="col-md-8 border-right">
+                        <div class="status p-3">
+                            <table class="table table-borderless">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Hospital</span>
+                                            <span class="subheadings">Cairo Hospital</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Time/Date</span>
+                                            <span class="subheadings">5:00PM 3-12-2020</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Status</span>
+                                            <span class="subheadings"><i class="dots"></i> Booked</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Speciality</span>
+                                            <span class="subheadings">Dental Clinic</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Referring Doctor</span>
+                                            <span class="subheadings">Dr. Harry Pimn</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Contact</span>
+                                            <span class="subheadings">52, Maria Block, Victoria Road, CA USA</span>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Reason of visiting</span>
+                                            <span class="subheadings">Lorem ipsum is placeholder text commonly used in the graphic, print.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Direction</span>
+                                            <span class="d-block subheadings">Get direction by using</span>
+                                            <span class="d-flex flex-row">
+                                        <img src="https://img.icons8.com/color/100/000000/google-maps.png" class="rounded" width="30" />
+                                        <img src="https://img.icons8.com/color/100/000000/pittsburgh-map.png" class="rounded" width="30" />
+                                    </span>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="d-flex flex-column">
+                                            <span class="heading d-block">Hospital Gallary</span>
+                                            <span class="d-flex flex-row gallery">
+                                        <img src="https://i.imgur.com/VfRSLTm.jpg" width="50" class="rounded">
+                                        <img src="https://i.imgur.com/jb9Cy5h.jpg" width="50" class="rounded">
+                                        <img src="https://i.imgur.com/vBUz4HA.jpg" width="50" class="rounded">
+                                    </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 text-center">
+                            <div class="profile">
+                                <img src="https://i.imgur.com/VfRSLTm.jpg" width="100" class="rounded-circle img-thumbnail">
+                                <span class="d-block mt-3 font-weight-bold">Dr. Samsung Philip.</span>
+                            </div>
+                            <div class="about-doctor">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <span class="heading d-block">Education</span>
+                                                <span class="subheadings">University of Harward</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <span class="heading d-block">Language</span>
+                                                <span class="subheadings">Spanish, English</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <span class="heading d-block">Organisation</span>
+                                                <span class="subheadings">Accupunture</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <span class="heading d-block">Specialist</span>
+                                                <span class="subheadings">Accupunture</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>
