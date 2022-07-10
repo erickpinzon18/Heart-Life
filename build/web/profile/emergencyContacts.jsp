@@ -190,7 +190,7 @@
                                             <h2>Administrar <b>Contactos de Emergencia</b></h2>
                                         </div>
                                         <div class="col-sm-4 text-right">
-                                            <a href="#addModal" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i class="material-icons"></i> <span>Agregar</span></a>
+                                            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAdd">Agregar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -225,7 +225,8 @@
                                                     onclick="editContact(<%=nContacto%>)">
                                                    Editar
                                                 </a>
-                                                <a type="button" class="btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                <a type="button" class="btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
+                                                    onclick="deleteContact(<%=nContacto%>)">
                                                     Borrar
                                                 </a>
                                             </td>
@@ -257,28 +258,99 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Modificar Contacto de Emergencia</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="control-label">Nombre</label>
-                    <input type="text" name="name" id="nameModal" class="form-control">             
+            <form action="updateEmergency" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">User</label>
+                        <input type="text" name="user" id="userModal" class="form-control" value="<%=user%>" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">ID Contacto</label>
+                        <input type="text" name="id" id="idModal" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nombre</label>
+                        <input type="text" name="name" id="nameModal" class="form-control">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input type="text" name="email" id="emailModal" class="form-control">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Direccion</label>
+                        <input type="text" name="direc" id="direcModal" class="form-control">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Numero</label>
+                        <input type="text" name="num" id="numModal" class="form-control">             
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Email</label>
-                    <input type="text" name="email" id="emailModal" class="form-control">             
+                <div class="modal-footer">
+                    <a class="btn btn-danger" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar</button>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Direccion</label>
-                    <input type="text" name="direc" id="direcModal" class="form-control">             
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Numero</label>
-                    <input type="text" name="num" id="numModal" class="form-control">             
-                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%
+    sql = "SELECT max(nContacto)+1 max FROM emergencyContacts WHERE user = '"+user+"'";
+    int max = 0;
+    try {
+        c.conectar();
+        c.rs = c.smt.executeQuery(sql);  
+        if (c.rs != null) {
+            while (c.rs.next()) {
+                max = c.rs.getInt("max");
+            }
+        }
+        c.desconectar();
+    } catch (SQLException ex) {
+        System.out.println("Error al verificar max contacto de emergencia "+ ex +" | SQL: "+ sql);
+    }  
+%>                    
+                    
+<!-- Modal Agregar -->
+<div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Agregar Contacto de Emergencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success">Guardar</button>
-            </div>
+            <form action="addEmergency" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">User</label>
+                        <input type="text" name="user" id="userModalAdd" class="form-control" value="<%=user%>" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">ID Contacto</label>
+                        <input type="text" name="id" id="idModalAdd" class="form-control" value="<%=max%>" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nombre</label>
+                        <input type="text" name="name" id="nameModalAdd" class="form-control">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input type="text" name="email" id="emailModalAdd" class="form-control">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Direccion</label>
+                        <input type="text" name="direc" id="direcModalAdd" class="form-control">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Numero</label>
+                        <input type="text" name="num" id="numModalAdd" class="form-control">             
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -288,28 +360,60 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal Delete</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar Contacto de Emergencia</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-            </div>
+            <form action="removeEmergency" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">User</label>
+                        <input type="text" name="user" id="userModalRm" class="form-control" value="<%=user%>" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">ID Contacto</label>
+                        <input type="text" name="id" id="idModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nombre</label>
+                        <input type="text" name="name" id="nameModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input type="text" name="email" id="emailModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Direccion</label>
+                        <input type="text" name="direc" id="direcModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Numero</label>
+                        <input type="text" name="num" id="numModalRm" class="form-control" readonly>             
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 <script src="../js/jquery-3.6.0.min.js"></script>
 <script>
     function editContact(id) {
+        $("#idModal").val(id);
         $("#nameModal").val($("#name"+id).text());
         $("#emailModal").val($("#email"+id).text());
         $("#direcModal").val($("#direc"+id).text());
         $("#numModal").val($("#num"+id).text());
-        //$("#userAlert").html(result);
-    }    
+    }   
+    function deleteContact(id) {
+        $("#idModalRm").val(id);
+        $("#nameModalRm").val($("#name"+id).text());
+        $("#emailModalRm").val($("#email"+id).text());
+        $("#direcModalRm").val($("#direc"+id).text());
+        $("#numModalRm").val($("#num"+id).text());
+    }   
 </script>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
