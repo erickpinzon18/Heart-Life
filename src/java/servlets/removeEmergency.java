@@ -24,7 +24,7 @@ public class removeEmergency extends HttpServlet {
         String num = request.getParameter("num");
         
         Conexion c = new Conexion();
-        String sql = "DELETE FROM emergencyContacts WHERE user ='"+user+"' and nContacto = "+id;
+        String sql = "DELETE FROM emergencyContacts WHERE usr ='"+user+"' and nContacto = "+id;
         try {
             c.conectar();
             int regs = c.smt.executeUpdate(sql);

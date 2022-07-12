@@ -9,7 +9,7 @@
 //Relleno de datos
                     Conexion c = new Conexion();
                     String user = (String) session.getAttribute("user");
-                    String sql = "SELECT nContacto, nombre, email, direc, numero FROM emergencyContacts WHERE user = '"+user+"'";
+                    String sql = "SELECT nContacto, nombre, email, direc, numero FROM emergencyContacts WHERE usr = '"+user+"'";
                     String nombre = null, email = null, direc = null, numero = null;
                     int nContacto = 0;
                     try {
@@ -295,7 +295,7 @@
 </div>
 
 <%
-    sql = "SELECT max(nContacto)+1 max FROM emergencyContacts WHERE user = '"+user+"'";
+    sql = "SELECT max(nContacto)+1 max FROM emergencyContacts WHERE usr = '"+user+"'";
     int max = 0;
     try {
         c.conectar();

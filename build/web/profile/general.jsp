@@ -9,7 +9,7 @@
 //Relleno de datos
                     Conexion c = new Conexion();
                     String user = (String) session.getAttribute("user");
-                    String sql = "SELECT nombre, fec_nac, correo FROM user WHERE user = '"+user+"'";
+                    String sql = "SELECT nombre, fec_nac, correo FROM userh WHERE usr = '"+user+"'";
                     String nombre = null, fec_nac = null, correo = null;
                     try {
                         c.conectar();
@@ -25,7 +25,7 @@
                     } catch (SQLException ex) {
                         System.out.println("Error al buscar usuario: "+ ex +" | SQL: "+ sql);
                     }
-                    sql = "SELECT * FROM GENERAL WHERE user = '"+user+"'";
+                    sql = "SELECT * FROM GENERAL WHERE usr = '"+user+"'";
                     String direccion = null, ciudad = null, estado = null;
                     int cp = 0;
                     try {

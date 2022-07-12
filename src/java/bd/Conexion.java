@@ -1,6 +1,5 @@
 package bd;
 
-import com.mysql.cj.Messages;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -37,7 +36,7 @@ public class Conexion {
     
     public int insertarUsuario (Usuario u) {
         //System.out.println(u.getFec_nac());
-        String sql = "INSERT INTO user (user, password, id_fb, nombre, fec_nac, correo) values "
+        String sql = "INSERT INTO userh (usr, pass, id_fb, nombre, fec_nac, correo) values "
                 + "('"+u.getUsuario()+"',"
                 + "'"+u.getPassword()+"',"
                 + "'"+u.getId_fb()+"',"
@@ -57,7 +56,7 @@ public class Conexion {
     
     public boolean validarEnBD (String col, String value) {
         //Cambiar esto jeje
-        String sql = "SELECT "+col+" FROM USER WHERE "+col+ " = '"+value+"'";
+        String sql = "SELECT "+col+" FROM USERH WHERE "+col+ " = '"+value+"'";
         boolean exists = false;
         try {
             conectar();
@@ -80,7 +79,7 @@ public class Conexion {
     
     public boolean login (String pass, String user) {
         //
-        String sql = "SELECT password FROM USER WHERE user = '"+user+"'";
+        String sql = "SELECT pass FROM USERH WHERE usr = '"+user+"'";
         
         boolean logBD = false;
         try {
@@ -88,7 +87,7 @@ public class Conexion {
             rs = smt.executeQuery(sql);
             if (rs != null) {
                 while (rs.next()) {
-                    String passQry = rs.getString("password");
+                    String passQry = rs.getString("pass");
                     if (passQry.equals(pass)) {
                         logBD = true;
                     }

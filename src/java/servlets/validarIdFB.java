@@ -22,7 +22,7 @@ public class validarIdFB extends HttpServlet {
         
         if (c.validarEnBD("id_fb", id)) {
             System.out.println(user);
-            String sql = "SELECT user FROM user WHERE id_fb = '"+id+"'";
+            String sql = "SELECT usr FROM userh WHERE id_fb = '"+id+"'";
             try {                    
                 c.conectar();
                 c.rs = c.smt.executeQuery(sql);
@@ -31,7 +31,7 @@ public class validarIdFB extends HttpServlet {
                     System.out.println("Regresa algo dif a null");
                     while (c.rs.next()) {
                         System.out.println("Hay un registro");
-                        user = c.rs.getString("user");
+                        user = c.rs.getString("usr");
                         System.out.println("user: "+user);
                         HttpSession session = request.getSession();        
                         session.setAttribute("user", user);        

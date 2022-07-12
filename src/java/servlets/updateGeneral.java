@@ -25,14 +25,14 @@ public class updateGeneral extends HttpServlet {
         String fec_nac = request.getParameter("fec_nac");
         
         Conexion c = new Conexion();
-        String sql = "UPDATE user SET user = '"+user+"', nombre = '"+name+"', fec_nac = '"+fec_nac+"', correo = '"+email+"' WHERE user = '"+user+"'";
+        String sql = "UPDATE userh SET usr = '"+user+"', nombre = '"+name+"', fec_nac = '"+fec_nac+"', correo = '"+email+"' WHERE usr = '"+user+"'";
         try {
             c.conectar();
             int regs = c.smt.executeUpdate(sql);
         } catch (SQLException ex) {
-            System.out.println("Error al actualizar a user: "+ ex +" | SQL: "+ sql);
+            System.out.println("Error al actualizar a usr: "+ ex +" | SQL: "+ sql);
         }
-        sql = "UPDATE general SET direccion = '"+direc+"', ciudad = '"+city+"', estado = '"+estado+"', cp = "+cp+" WHERE user = '"+user+"'";
+        sql = "UPDATE general SET direccion = '"+direc+"', ciudad = '"+city+"', estado = '"+estado+"', cp = "+cp+" WHERE usr = '"+user+"'";
         System.out.println("updateGeneral: SQL actualizando tabla general: " + sql);
         try {
             int regs = c.smt.executeUpdate(sql);

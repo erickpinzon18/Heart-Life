@@ -23,7 +23,7 @@ public class updateEmergency extends HttpServlet {
         String num = request.getParameter("num");
         
         Conexion c = new Conexion();
-        String sql = "UPDATE emergencyContacts SET nombre = '"+name+"', email = '"+email+"', direc = '"+direc+"', numero = '"+num+"' WHERE user = '"+user+"' and nContacto = "+id;
+        String sql = "UPDATE emergencyContacts SET nombre = '"+name+"', email = '"+email+"', direc = '"+direc+"', numero = '"+num+"' WHERE usr = '"+user+"' and nContacto = "+id;
         try {
             c.conectar();
             int regs = c.smt.executeUpdate(sql);
