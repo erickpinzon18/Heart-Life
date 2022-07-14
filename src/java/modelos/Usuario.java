@@ -1,7 +1,5 @@
 package modelos;
 
-import java.sql.Date;
-
 public class Usuario {
     private String nombre, usuario, password, correo, id_fb = null, fec_nac;
 

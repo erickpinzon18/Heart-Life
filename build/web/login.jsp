@@ -43,11 +43,11 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user"
                                                id="user" name="user" aria-describedby="emailHelp"
-                                               placeholder="Usuario">
+                                               placeholder="Usuario" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="pass" name="pass" placeholder="Contraseña">
+                                               id="pass" name="pass" placeholder="Contraseña" required>
                                     </div>
                                     <label id="userAlert" style="display: none;"></label>
                                     <button onclick="login();" class="btn btn-primary btn-user btn-block">
@@ -90,7 +90,7 @@
                 user: user,
                 pass: pass
             },
-            type: 'POST',
+            //type: 'POST',
             success: function (result) {
                 $("#userAlert").html(result);
             }

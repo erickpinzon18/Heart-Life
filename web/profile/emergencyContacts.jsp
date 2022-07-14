@@ -1,3 +1,5 @@
+<%@page import="modelos.EmergencyContacts"%>
+<%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="bd.Conexion"%>
@@ -6,16 +8,11 @@
         response.sendRedirect("../index.jsp");
     }
     
-//Relleno de datos
-                    Conexion c = new Conexion();
-                    String user = (String) session.getAttribute("user");
-                    String sql = "SELECT nContacto, nombre, email, direc, numero FROM emergencyContacts WHERE usr = '"+user+"'";
-                    String nombre = null, email = null, direc = null, numero = null;
-                    int nContacto = 0;
-                    try {
-                        c.conectar();
-                        c.rs = c.smt.executeQuery(sql);
-                        
+    //Relleno de datos
+    Conexion c = new Conexion();
+    String user = (String) session.getAttribute("user");
+    List <EmergencyContacts> lista = c.mostrarEmergencyContacts(user);
+    int max = c.maxEmergency(user);
 %>
 <!doctype html>
 <html lang="en">
@@ -206,38 +203,27 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        if (c.rs != null) {
-                                                while (c.rs.next()) {
-                                                    nContacto = c.rs.getInt("nContacto");
-                                                    nombre = c.rs.getString("nombre");
-                                                    email = c.rs.getString("email");
-                                                    direc = c.rs.getString("direc");
-                                                    numero = c.rs.getString("numero");
+                                        for (int i = 0; i < lista.size(); i++) {
                                     %>
                                         <tr>
-                                            <td style="display: none;"> <p id="nContacto"><%=nombre%></p></td>
-                                            <td> <p id="name<%=nContacto%>"><%=nombre%></p></td>
-                                            <td> <p id="email<%=nContacto%>"><%=email%></p></td>
-                                            <td> <p id="direc<%=nContacto%>"><%=direc%></p></td>
-                                            <td> <p id="num<%=nContacto%>"><%=numero%></p></td>
+                                            <td style="display: none;"> <p id="nContacto"><%=lista.get(i).getnContacto()%></p></td>
+                                            <td> <p id="name<%=lista.get(i).getnContacto()%>"><%=lista.get(i).getNombre()%></p></td>
+                                            <td> <p id="email<%=lista.get(i).getnContacto()%>"><%=lista.get(i).getEmail()%></p></td>
+                                            <td> <p id="direc<%=lista.get(i).getnContacto()%>"><%=lista.get(i).getDirec()%></p></td>
+                                            <td> <p id="num<%=lista.get(i).getnContacto()%>"><%=lista.get(i).getNumero()%></p></td>
                                             <td>
                                                 <a type="button" class="btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit" 
-                                                    onclick="editContact(<%=nContacto%>)">
+                                                    onclick="editContact(<%=lista.get(i).getnContacto()%>)">
                                                    Editar
                                                 </a>
                                                 <a type="button" class="btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
-                                                    onclick="deleteContact(<%=nContacto%>)">
+                                                    onclick="deleteContact(<%=lista.get(i).getnContacto()%>)">
                                                     Borrar
                                                 </a>
                                             </td>
                                         </tr>
                                     <%
-                                                }
-                                            }
-                                            c.desconectar();
-                                        } catch (SQLException ex) {
-                                            System.out.println("Error al insertar contacto de emergencia "+ ex +" | SQL: "+ sql);
-                                        }  
+                                        }
                                     %>
                                     </tbody>
                                 </table>
@@ -293,23 +279,6 @@
         </div>
     </div>
 </div>
-
-<%
-    sql = "SELECT max(nContacto)+1 max FROM emergencyContacts WHERE usr = '"+user+"'";
-    int max = 0;
-    try {
-        c.conectar();
-        c.rs = c.smt.executeQuery(sql);  
-        if (c.rs != null) {
-            while (c.rs.next()) {
-                max = c.rs.getInt("max");
-            }
-        }
-        c.desconectar();
-    } catch (SQLException ex) {
-        System.out.println("Error al verificar max contacto de emergencia "+ ex +" | SQL: "+ sql);
-    }  
-%>                    
                     
 <!-- Modal Agregar -->
 <div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -415,11 +384,9 @@
         $("#numModalRm").val($("#num"+id).text());
     }   
 </script>
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
-            
 </script>
 
 </body>

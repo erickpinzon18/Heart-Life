@@ -1,10 +1,18 @@
 package modelos;
 
 public class General {
-    private String user, direc, estado;
+    private String user, direc, estado, ciudad;
     private int cp;
 
     public General() {
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
     public String getUser() {

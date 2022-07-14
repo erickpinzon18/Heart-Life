@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelos.General;
+import modelos.Usuario;
 
 @WebServlet(name = "updateGeneral", urlPatterns = {"/profile/updateGeneral"})
 public class updateGeneral extends HttpServlet {
@@ -15,31 +17,20 @@ public class updateGeneral extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String user = request.getParameter("usuario");
-        String email = request.getParameter("email");
-        String direc = request.getParameter("direc");
-        String city = request.getParameter("city");
-        String estado = request.getParameter("estado");
-        String cp = request.getParameter("cp");
-        String fec_nac = request.getParameter("fec_nac");
-        
         Conexion c = new Conexion();
-        String sql = "UPDATE userh SET usr = '"+user+"', nombre = '"+name+"', fec_nac = '"+fec_nac+"', correo = '"+email+"' WHERE usr = '"+user+"'";
-        try {
-            c.conectar();
-            int regs = c.smt.executeUpdate(sql);
-        } catch (SQLException ex) {
-            System.out.println("Error al actualizar a usr: "+ ex +" | SQL: "+ sql);
-        }
-        sql = "UPDATE general SET direccion = '"+direc+"', ciudad = '"+city+"', estado = '"+estado+"', cp = "+cp+" WHERE usr = '"+user+"'";
-        System.out.println("updateGeneral: SQL actualizando tabla general: " + sql);
-        try {
-            int regs = c.smt.executeUpdate(sql);
-            c.desconectar();
-        } catch (SQLException ex) {
-            System.out.println("Error al actualizar a general: "+ ex +" | SQL: "+ sql);
-        }
+        Usuario u = new Usuario();
+        General g = new General();
+        u.setNombre(request.getParameter("name"));
+        u.setUsuario(request.getParameter("usuario"));
+        u.setCorreo(request.getParameter("email"));
+        u.setFec_nac(request.getParameter("fec_nac"));
+        g.setUser(request.getParameter("usuario"));
+        g.setDirec(request.getParameter("direc"));
+        g.setCiudad(request.getParameter("city"));
+        g.setEstado(request.getParameter("estado"));
+        g.setCp(Integer.parseInt(request.getParameter("cp")));
+        c.modificarUsuario(u);
+        c.modificarGeneral(g);
         response.sendRedirect("general.jsp");
     }
 }

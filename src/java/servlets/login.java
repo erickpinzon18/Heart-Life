@@ -3,7 +3,6 @@ package servlets;
 import bd.Conexion;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +21,7 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try (PrintWriter ot = response.getWriter()) {
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
             Conexion c = new Conexion();
@@ -30,8 +30,9 @@ public class login extends HttpServlet {
                 session.setAttribute("user", user);        
                 response.sendRedirect("index.jsp");  
             } else {
-                out.println("<script>alert('Usuario o Contraseña erronea');</script>");
+                ot.println("<script>alert('Usuario o Contraseña erronea');window.location.replace(\"login.jsp\");</script>");
             }
+        }
     }
 
 }

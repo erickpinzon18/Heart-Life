@@ -101,8 +101,9 @@
             url: "jsp/Login/validarUsuario",
             data: {
                 user: user,
-                col: "user"
+                col: "usr"
             },
+            type: 'POST',
             success: function (result) {
                 $("#userAlert").html(result);
             }

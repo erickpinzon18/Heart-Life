@@ -1,3 +1,6 @@
+<%@page import="modelos.General"%>
+<%@page import="java.util.List"%>
+<%@page import="modelos.Usuario"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="bd.Conexion"%>
@@ -6,43 +9,10 @@
         response.sendRedirect("../index.jsp");
     }
 
-//Relleno de datos
-                    Conexion c = new Conexion();
-                    String user = (String) session.getAttribute("user");
-                    String sql = "SELECT nombre, fec_nac, correo FROM userh WHERE usr = '"+user+"'";
-                    String nombre = null, fec_nac = null, correo = null;
-                    try {
-                        c.conectar();
-                        c.rs = c.smt.executeQuery(sql);
-                        if (c.rs != null) {
-                            while (c.rs.next()) {
-                                nombre = c.rs.getString("nombre");
-                                fec_nac = c.rs.getString("fec_nac");
-                                correo = c.rs.getString("correo");
-                            }
-                        }
-                        c.desconectar();
-                    } catch (SQLException ex) {
-                        System.out.println("Error al buscar usuario: "+ ex +" | SQL: "+ sql);
-                    }
-                    sql = "SELECT * FROM GENERAL WHERE usr = '"+user+"'";
-                    String direccion = null, ciudad = null, estado = null;
-                    int cp = 0;
-                    try {
-                        c.conectar();
-                        c.rs = c.smt.executeQuery(sql);
-                        if (c.rs != null) {
-                            while (c.rs.next()) {
-                                direccion = c.rs.getString("direccion");
-                                ciudad = c.rs.getString("ciudad");
-                                estado = c.rs.getString("estado");
-                                cp = c.rs.getInt("cp");
-                            }
-                        }
-                        c.desconectar();
-                    } catch (SQLException ex) {
-                        System.out.println("Error al buscar usuario: "+ ex +" | SQL: "+ sql);
-                    }               
+    Conexion c = new Conexion();
+    String user = (String) session.getAttribute("user");
+    List <Usuario> lu = c.mostrarUsuarios(user);
+    List <General> lg = c.mostrarGeneral(user);
 %>
 
 <!doctype html>
@@ -179,43 +149,43 @@
 
                             <div class="form-group"> <!-- Full Name -->
                                 <label for="name" class="control-label">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" value="<%=nombre%>">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" value="<%=lu.get(0).getNombre()%>">
                             </div>
                             
                             <div class="form-group"> <!-- Full Name -->
                                 <label for="name" class="control-label">Usuario</label>
-                                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre" value="<%=user%>" onchange="validUser()">
+                                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre" value="<%=lu.get(0).getUsuario()%>" onchange="validUser()">
                                 <label id="userAlert" style="display: none;"></label>
                             </div>
                             
                             <div class="form-group"> <!-- Full Name -->
                                 <label for="name_id" class="control-label">Correo</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<%=correo%>">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<%=lu.get(0).getCorreo()%>">
                             </div>
 
                             <div class="form-group"> <!-- Street 1 -->
                                 <label for="street1_id" class="control-label">Direccion</label>
-                                <input type="text" class="form-control" id="direc" name="direc" placeholder="Calle, #, Colonia, CP"  value="<%=direccion%>">
+                                <input type="text" class="form-control" id="direc" name="direc" placeholder="Calle, #, Colonia, CP"  value="<%=lg.get(0).getDirec()%>">
                             </div>
 
                             <div class="form-group"> <!-- City-->
                                 <label for="city_id" class="control-label">Ciudad</label>
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad"  value="<%=ciudad%>">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad"  value="<%=lg.get(0).getCiudad()%>">
                             </div>
 
                             <div class="form-group"> <!-- State Button -->
                                 <label for="state_id" class="control-label">Estado</label>
-                                <input type="text" class="form-control" id="estado" name="estado" value="<%=estado%>">
+                                <input type="text" class="form-control" id="estado" name="estado" value="<%=lg.get(0).getEstado()%>">
                             </div>
 
                             <div class="form-group"> <!-- Zip Code-->
                                 <label for="zip_id" class="control-label">Codigo Postal</label>
-                                <input type="text" class="form-control" id="cp" name="cp" placeholder="#####" value="<%=cp%>">
+                                <input type="number" class="form-control" id="cp" name="cp" placeholder="#####" value="<%=lg.get(0).getCp()%>">
                             </div>
 
                             <div class="form-group"> <!-- Zip Code-->
                                 <label for="date_id" class="control-label">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" id="fec_nac" name="fec_nac" value="<%=fec_nac%>">
+                                <input type="date" class="form-control" id="fec_nac" name="fec_nac" value="<%=lu.get(0).getFec_nac()%>">
                             </div>
 
                             <div class="form-group text-right"> <!-- Submit Button -->
@@ -276,13 +246,13 @@
 <script>
     function validUser () {
         var user = $("#usuario").val();
-        alert(user);
         $.ajax ({
             url: "../jsp/Login/validarUsuario",
             data: {
                 user: user,
-                col: "user"
+                col: "usr"
             },
+            type : 'POST',
             success: function (result) {
                 $("#userAlert").html(result);
             }

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelos.EmergencyContacts;
 
 @WebServlet(name = "removeEmergency", urlPatterns = {"/profile/removeEmergency"})
 public class removeEmergency extends HttpServlet {
@@ -24,14 +25,14 @@ public class removeEmergency extends HttpServlet {
         String num = request.getParameter("num");
         
         Conexion c = new Conexion();
-        String sql = "DELETE FROM emergencyContacts WHERE usr ='"+user+"' and nContacto = "+id;
-        try {
-            c.conectar();
-            int regs = c.smt.executeUpdate(sql);
-        } catch (SQLException ex) {
-            System.out.println("Error al eliminar a emergencyContacts: "+ ex +" | SQL: "+ sql);
-        }
-         c.desconectar();
+        EmergencyContacts e = new EmergencyContacts();
+        e.setUser(user);
+        e.setnContacto(id);
+        e.setNombre(name);
+        e.setEmail(email);
+        e.setDirec(direc);
+        e.setNumero(num);
+        c.eliminarEmergency(e);
         response.sendRedirect("emergencyContacts.jsp");
     }
 }

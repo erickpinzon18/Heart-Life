@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelos.EmergencyContacts;
 
 @WebServlet(name = "addEmergency", urlPatterns = {"/profile/addEmergency"})
 public class addEmergency extends HttpServlet {
@@ -23,14 +24,22 @@ public class addEmergency extends HttpServlet {
         String num = request.getParameter("num");
         
         Conexion c = new Conexion();
-        String sql = "INSERT INTO emergencyContacts VALUES ('"+user+"',"+id+",'"+name+"','"+email+"','"+direc+"','"+num+"')";
+        EmergencyContacts e = new EmergencyContacts();
+        e.setUser(user);
+        e.setnContacto(id);
+        e.setNombre(name);
+        e.setEmail(email);
+        e.setDirec(direc);
+        e.setNumero(num);
+        c.insertarEmergency(e);
+        /*String sql = "INSERT INTO emergencyContacts VALUES ('"+user+"',"+id+",'"+name+"','"+email+"','"+direc+"','"+num+"')";
         try {
             c.conectar();
             int regs = c.smt.executeUpdate(sql);
         } catch (SQLException ex) {
             System.out.println("Error al insertar a emergencyContacts: "+ ex +" | SQL: "+ sql);
         }
-         c.desconectar();
+         c.desconectar();*/
         response.sendRedirect("emergencyContacts.jsp");
     }
 }
