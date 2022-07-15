@@ -2,7 +2,6 @@ package servlets;
 
 import bd.Conexion;
 import java.io.IOException;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,27 +20,9 @@ public class validarIdFB extends HttpServlet {
         Conexion c = new Conexion();
         
         if (c.validarEnBD("id_fb", id)) {
-            System.out.println(user);
-            String sql = "SELECT usr FROM userh WHERE id_fb = '"+id+"'";
-            try {                    
-                c.conectar();
-                c.rs = c.smt.executeQuery(sql);
-                System.out.println(sql);
-                if (c.rs != null) {
-                    System.out.println("Regresa algo dif a null");
-                    while (c.rs.next()) {
-                        System.out.println("Hay un registro");
-                        user = c.rs.getString("usr");
-                        System.out.println("user: "+user);
-                        HttpSession session = request.getSession();        
-                        session.setAttribute("user", user);        
-                        response.sendRedirect("index.jsp");
-                    }
-                }
-                c.desconectar();
-            } catch (SQLException ex) {
-                System.out.println("Error al buscar usuario: "+ ex +" | SQL: "+ sql);
-            }
+            HttpSession session = request.getSession();        
+            session.setAttribute("user", c.validarIdFB(id));        
+            response.sendRedirect("index.jsp");
         } else {
             response.sendRedirect("jsp/Login/LoginFB.jsp?user_name=" + user + "&user_id="+ id);
         }        

@@ -106,6 +106,23 @@ public class Conexion {
         return lista;
     }
     
+    public String validarIdFB(String id_fb) {
+        String sql = "Select usr from userh WHERE id_fb = '"+id_fb+"'";
+        String user = null;
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            while (rs.next()) {
+                user = rs.getString("usr");
+            }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error al validar usuario de FB: "+ex+" , SQL: "+sql);
+            user = null;
+        }
+        return user;
+    }
+    
     public int modificarUsuario (Usuario u) {
         String sql = "UPDATE userh set "
                 + "usr = '"+u.getUsuario()+"',"
@@ -243,6 +260,27 @@ public class Conexion {
         }
     }
     
+    public int maxEmergency (String user) {
+        String sql = "SELECT max(nContacto)+1 max FROM emergencyContacts WHERE usr = '"+user+"'";
+        int max = 0;
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    max = rs.getInt("max");
+                }
+            }
+            desconectar();
+            return max;
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar maxEmergency: "+ ex +" | SQL: "+ sql);
+            return max;
+        }
+    }
+    
+    
+    
     public boolean login (String pass, String user) {
         String sql = "SELECT pass FROM USERH WHERE usr = '"+user+"'";
         boolean logBD = false;
@@ -266,22 +304,5 @@ public class Conexion {
     }
     
     // Buscar usuario
-    public int maxEmergency (String user) {
-        String sql = "SELECT max(nContacto)+1 max FROM emergencyContacts WHERE usr = '"+user+"'";
-        int max = 0;
-        try {
-            conectar();
-            rs = smt.executeQuery(sql);
-            if (rs != null) {
-                while (rs.next()) {
-                    max = rs.getInt("max");
-                }
-            }
-            desconectar();
-            return max;
-        } catch (SQLException ex) {
-            System.out.println("Error al buscar maxEmergency: "+ ex +" | SQL: "+ sql);
-            return max;
-        }
-    }
+    
 }

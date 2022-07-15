@@ -10,6 +10,7 @@ create table userh (
     correo varchar(50) not null) 
 Engine = innoDB;
 select * from userh;
+update userh set id_fb = "4530230660413535" where usr = 'erickpinzon18';
 
 create table general (
 	usr varchar(25) not null,

@@ -2,8 +2,6 @@ package servlets;
 
 import bd.Conexion;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,14 +22,12 @@ public class loginFB extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //System.out.println("Entra a loginFB con: " + request.getParameter("id_fb"));
         String user = request.getParameter("user");
         String id_fb = request.getParameter("id_fb");
         String nombre = request.getParameter("nombre");
         String email = request.getParameter("email");
         String pass = request.getParameter("pass2");
         String fec_nac = request.getParameter("fec_nac");
-        //System.out.println("Fecha Nacimiento LoginFB.java: " + fec_nac);
         Conexion c = new Conexion();
         Usuario u = new Usuario();
         u.setUsuario(user);
