@@ -13,100 +13,136 @@
             rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-light bg-white  navbar-expand-md">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="assets/img/Logo.png" width="16%"  alt="image">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse " id="navbarNav3" style="">
-            <ul class="navbar-nav ms-auto">
-                <%
-                    if(session.getAttribute("user") != null) {
-                %>
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Perfil
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="navbarDropdown" style="min-width:300px">
-                        <h6 class="text-danger"><%=session.getAttribute("user")%></h6>
-                        <div class="dropdown-divider"></div>
-                        <ul class="shopping-cart-items pt-2 pl-0">
-                            <li class="row mt-3">
-                                <div class="col-4">
-                                    <img src="https://img.icons8.com/ios/50/undefined/hospital.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-                                </div>
-                                <div class="col-8">
-                                    <h6>
-                                        <a href="profile/general.jsp" class="text-danger">Emergencia</a>
-                                    </h6>
-                                    <span class="text-muted">Completa tus datos para una mejor solucion</span>
-                                </div>
-                            </li>
-                            <li class="row mt-3">
-                                <div class="col-4">
-                                    <img src="https://img.icons8.com/ios/50/undefined/apple-contacts.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-                                </div>
-                                <div class="col-8">
-                                    <h6>
-                                        <a href="profile/general.jsp" class="text-danger">Contactos</a>
-                                    </h6>
-                                    <span class="text-muted">Agrega o modifica contactos en caso de emergencia</span>
-                                </div>
-                            </li>
-                            <li class="row mt-3">
-                                <div class="col-4">
-                                    <img src="https://img.icons8.com/ios/50/undefined/buy-for-cash.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-                                </div>
-                                <div class="col-8">
-                                    <h6>
-                                        <a href="buy.jsp" class="text-danger">Comprar</a>
-                                    </h6>
-                                    <span class="text-muted">Comprar dispositivo para salvar vidas</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <a href="profile/general.jsp" class="btn btn-md btn-block btn-danger mt-3" style="margin: 0;">Ver Perfil</a>
-                    </div>
-                </li>
-                <%    
-                    }
-                %>
-                
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="buy.jsp">Comprar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about.jsp">Acerca</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about-us.jsp">Nosotros</a>
-                </li>
-                <%
-                    if(session.getAttribute("user") == null) {
-                %>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">Iniciar Sesion</a>
-                </li>
-                <%    
-                    } else {
-                %>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">Cerrar Sesion</a>
-                </li>   
-                <%
-                    }
-                %>
-            </ul>
+    <nav class="navbar navbar-light bg-white  navbar-expand-md">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/Logo.png" width="16%"  alt="image">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse " id="navbarNav3" style="">
+                <ul class="navbar-nav ms-auto">
+                    <%
+                        if(session.getAttribute("user") != null) {
+                    %>
+                    <li class="nav-item dropdown">
+    
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Perfil
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="navbarDropdown" style="min-width:300px">
+                            <h6 class="text-danger"><%=session.getAttribute("user")%></h6>
+                            <div class="dropdown-divider"></div>
+                            <ul class="shopping-cart-items pt-2 pl-0">
+                                <li class="row mt-3">
+                                    <div class="col-4">
+                                        <img src="https://img.icons8.com/dotty/50/1A1A1A/ambulance.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    </div>
+                                    <div class="col-8">
+                                        <h6>
+                                            <a href="profile/mail.jsp" class="text-danger">EMERGENCIA</a>
+                                        </h6>
+                                        <span class="text-muted">Si necesitas ayuda da click aqui y mandaremos informacion a tus contactos de emergencia</span>
+                                    </div>
+                                </li>
+                                <li class="row mt-3">
+                                    <div class="col-4">
+                                        <img src="https://img.icons8.com/ios-glyphs/50/1A1A1A/gear.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    </div>
+                                    <div class="col-8">
+                                        <h6>
+                                            <a href="profile/general.jsp" class="text-danger">General</a>
+                                        </h6>
+                                        <span class="text-muted">Modifica tu informacion en general</span>
+                                    </div>
+                                </li>
+                                <li class="row mt-3">
+                                    <div class="col-4">
+                                        <img src="https://img.icons8.com/ios/50/undefined/hospital.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    </div>
+                                    <div class="col-8">
+                                        <h6>
+                                            <a href="profile/emergencyContacts.jsp" class="text-danger">Contactos de Emergencia</a>
+                                        </h6>
+                                        <span class="text-muted">Agrega o modifica contactos en caso de emergencia</span>
+                                    </div>
+                                </li>
+                                <li class="row mt-3">
+                                    <div class="col-4">
+                                        <img src="https://img.icons8.com/ios/50/undefined/apple-contacts.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    </div>
+                                    <div class="col-8">
+                                        <h6>
+                                            <a href="profile/relatives.jsp" class="text-danger">Familiares Cercanos</a>
+                                        </h6>
+                                        <span class="text-muted">Agrega o modifica a tus familiares mas cercanos</span>
+                                    </div>
+                                </li>
+                                <li class="row mt-3">
+                                    <div class="col-4">
+                                        <img src="https://img.icons8.com/ios/50/1A1A1A/heart-health.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    </div>
+                                    <div class="col-8">
+                                        <h6>
+                                            <a href="profile/healt.jsp" class="text-danger">Salud</a>
+                                        </h6>
+                                        <span class="text-muted">Agrega o modifica alergias o enfermedades</span>
+                                    </div>
+                                </li>
+                                <li class="row mt-3">
+                                    <div class="col-4">
+                                        <img src="https://img.icons8.com/ios/50/1A1A1A/good-pincode.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    </div>
+                                    <div class="col-8">
+                                        <h6>
+                                            <a href="profile/security.jsp" class="text-danger">Seguridad</a>
+                                        </h6>
+                                        <span class="text-muted">Cambia tu contrasena</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a href="profile/general.jsp" class="btn btn-md btn-block btn-danger mt-3" style="margin: 0;">Ver Perfil</a>
+                        </div>
+                    </li>
+                    <%    
+                        }
+                    %>
+                    
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.jsp">Inicio</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="blog.jsp">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="buy.jsp">Comprar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.jsp">Acerca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about-us.jsp">Nosotros</a>
+                    </li>
+                    <%
+                        if(session.getAttribute("user") == null) {
+                    %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.jsp">Iniciar Sesion</a>
+                    </li>
+                    <%    
+                        } else {
+                    %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Cerrar Sesion</a>
+                    </li>   
+                    <%
+                        }
+                    %>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 <div class="container main-container">
 

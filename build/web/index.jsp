@@ -38,13 +38,35 @@
                         <ul class="shopping-cart-items pt-2 pl-0">
                             <li class="row mt-3">
                                 <div class="col-4">
+                                    <img src="https://img.icons8.com/dotty/50/1A1A1A/ambulance.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                </div>
+                                <div class="col-8">
+                                    <h6>
+                                        <a href="profile/mail.jsp" class="text-danger">EMERGENCIA</a>
+                                    </h6>
+                                    <span class="text-muted">Si necesitas ayuda da click aqui y mandaremos informacion a tus contactos de emergencia</span>
+                                </div>
+                            </li>
+                            <li class="row mt-3">
+                                <div class="col-4">
+                                    <img src="https://img.icons8.com/ios-glyphs/50/1A1A1A/gear.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                </div>
+                                <div class="col-8">
+                                    <h6>
+                                        <a href="profile/general.jsp" class="text-danger">General</a>
+                                    </h6>
+                                    <span class="text-muted">Modifica tu informacion en general</span>
+                                </div>
+                            </li>
+                            <li class="row mt-3">
+                                <div class="col-4">
                                     <img src="https://img.icons8.com/ios/50/undefined/hospital.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
                                 </div>
                                 <div class="col-8">
                                     <h6>
-                                        <a href="profile/general.jsp" class="text-danger">Emergencia</a>
+                                        <a href="profile/emergencyContacts.jsp" class="text-danger">Contactos de Emergencia</a>
                                     </h6>
-                                    <span class="text-muted">Completa tus datos para una mejor solucion</span>
+                                    <span class="text-muted">Agrega o modifica contactos en caso de emergencia</span>
                                 </div>
                             </li>
                             <li class="row mt-3">
@@ -53,20 +75,31 @@
                                 </div>
                                 <div class="col-8">
                                     <h6>
-                                        <a href="profile/general.jsp" class="text-danger">Contactos</a>
+                                        <a href="profile/relatives.jsp" class="text-danger">Familiares Cercanos</a>
                                     </h6>
-                                    <span class="text-muted">Agrega o modifica contactos en caso de emergencia</span>
+                                    <span class="text-muted">Agrega o modifica a tus familiares mas cercanos</span>
                                 </div>
                             </li>
                             <li class="row mt-3">
                                 <div class="col-4">
-                                    <img src="https://img.icons8.com/ios/50/undefined/buy-for-cash.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                    <img src="https://img.icons8.com/ios/50/1A1A1A/heart-health.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
                                 </div>
                                 <div class="col-8">
                                     <h6>
-                                        <a href="buy.jsp" class="text-danger">Comprar</a>
+                                        <a href="profile/healt.jsp" class="text-danger">Salud</a>
                                     </h6>
-                                    <span class="text-muted">Comprar dispositivo para salvar vidas</span>
+                                    <span class="text-muted">Agrega o modifica alergias o enfermedades</span>
+                                </div>
+                            </li>
+                            <li class="row mt-3">
+                                <div class="col-4">
+                                    <img src="https://img.icons8.com/ios/50/1A1A1A/good-pincode.png" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                </div>
+                                <div class="col-8">
+                                    <h6>
+                                        <a href="profile/security.jsp" class="text-danger">Seguridad</a>
+                                    </h6>
+                                    <span class="text-muted">Cambia tu contrasena</span>
                                 </div>
                             </li>
                         </ul>
@@ -79,6 +112,9 @@
                 
                 <li class="nav-item active">
                     <a class="nav-link" href="index.jsp">Inicio</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="blog.jsp">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="buy.jsp">Comprar</a>

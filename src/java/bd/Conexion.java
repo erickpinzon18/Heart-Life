@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.Notification;
 import modelos.Alergia;
 import modelos.EmergencyContacts;
 import modelos.Enfermedad;
 import modelos.General;
+import modelos.Notifications;
 import modelos.Relatives;
 import modelos.Usuario;
 
@@ -563,6 +565,60 @@ public class Conexion {
             return max;
         } catch (SQLException ex) {
             System.out.println("Error al buscar maxAlergia: "+ ex +" | SQL: "+ sql);
+            return max;
+        }
+    }
+    
+    public List<Notifications> mostrarNotifications(String user) {
+        List <Notifications> lista = new ArrayList<>();
+        String sql = "Select * from notification WHERE usr = '"+user+"' order by grado";
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            while (rs.next()) {
+                Notifications n = new Notifications();
+                n.setDesc(rs.getString("descripcion"));
+                n.setUser(rs.getString("usr"));
+                n.setGrado(rs.getInt("grado"));
+                n.setnNotif(rs.getInt("nNotif"));
+                lista.add(n);
+            }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los datos de MySQL en la tabla Notification: "+ex+" , SQL: "+sql);
+            lista = null;
+        }
+        return lista;
+    }
+    
+    public int eliminarNotifications (Notifications n) {
+        String sql = "DELETE FROM notification WHERE usr ='"+n.getUser()+"' and nNotif = "+n.getnNotif();
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar registro de Notification: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public int maxNotifications (String user) {
+        String sql = "SELECT count(nNotif) max FROM notification WHERE usr = '"+user+"'";
+        int max = 0;
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    max = rs.getInt("max");
+                }
+            }
+            desconectar();
+            return max;
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar maxNorif: "+ ex +" | SQL: "+ sql);
             return max;
         }
     }

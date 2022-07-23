@@ -1,3 +1,4 @@
+<%@page import="modelos.Notifications"%>
 <%@page import="modelos.Alergia"%>
 <%@page import="modelos.Enfermedad"%>
 <%@page import="modelos.EmergencyContacts"%>
@@ -16,8 +17,10 @@
     String user = (String) session.getAttribute("user");
     List <Enfermedad> le = c.mostrarEnfermedad(user);    
     List <Alergia> la = c.mostrarAlergia(user);
+    List <Notifications> ln = c.mostrarNotifications(user);
     int maxE = c.maxEnfermedad(user);
     int maxA = c.maxAlergia(user);
+    int maxN = c.maxNotifications(user);
 %>
 
 <!doctype html>
@@ -57,7 +60,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="general.jsp">
                     <i class="fas fa-fw fa-home"></i>
                     <span>General</span></a>
@@ -104,9 +107,9 @@
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link">
-                    <i class="fas fa-fw fa-random"></i>
+            <li class="nav-item active">
+                <a class="nav-link" href="healt.jsp">
+                    <i class="fas fa-fw fa-heart"></i>
                     <span>Salud</span></a>
             </li>
 
@@ -116,7 +119,7 @@
             <!-- Nav Item - Charts -->
             <center>
                 <li class="nav-item">
-                    <a class="btn btn-warning" href="mail.jsp">
+                    <a class="btn btn-warning btn-lg" href="mail.jsp">
                         <span>EMERGENCIA</span>
                     </a>
                 </li>
@@ -134,6 +137,30 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" autocomplete="off">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Escribe lo que estas buscando"
+                                   aria-label="Search" aria-describedby="basic-addon2" list="datalistOptions" id="dataList" onchange="redirect()">
+                            <datalist id="datalistOptions">
+                                <option value="Usuario">
+                                <option value="Correo">
+                                <option value="Tipo de Sangre">    
+                                <option value="Domicilio">
+                                <option value="Contactos de Emergencia">
+                                <option value="Familiares Cercanos">
+                                <option value="Seguridad">
+                                <option value="Enfermedades">
+                                <option value="Alergias">
+                            </datalist>
+                            <div class="input-group-append">
+                                <div class="btn btn-danger">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -145,11 +172,52 @@
                             </a>
                         </li>
 
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropstart no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
+                               data-bs-toggle="dropdown"  aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter"><%=maxN%></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item disabled text-danger">
+                                        NOTIFICACIONES
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <%
+                                    String url = "";
+                                    for (int i = 0; i < ln.size(); i++) {
+                                        switch (ln.get(i).getGrado()) {
+                                            case 1: url = "emergencyContacts.jsp"; break;
+                                            case 2: url = "relatives.jsp"; break;
+                                            case 3: url = "general.jsp"; break;
+                                            case 4: url = "healt.jsp"; break;
+                                            case 5: url = "../blog.jsp"; break;
+                                        }
+                                %>
+                                <li>
+                                    <a class="dropdown-item" href="<%=url%>" id="notif<%=ln.get(i).getnNotif()%>">
+                                        <%=ln.get(i).getDesc()%>
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <%
+                                    }
+                                %>
+                                
+                            </ul>
+                        </li>
+                        
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user"><%=session.getAttribute("user")%></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=session.getAttribute("user")%></span>
                                 <img class="img-profile rounded-circle" src="https://img.icons8.com/ios/50/undefined/user--v1.png">
                             </a>
                         </li>

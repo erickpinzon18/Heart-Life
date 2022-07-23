@@ -67,6 +67,14 @@ create table alergia (
 Engine = innoDB;
 select * from alergia;
 
+create table notification (
+	usr varchar(25) not null,
+    nNotif int not null,
+    descripcion varchar (100) not null,
+    grado int not null,
+    foreign key (usr) references userh (usr)) 
+Engine = innoDB;
+
 drop trigger if exists register;
 delimiter $$
 create trigger register after insert on userh for each row
@@ -76,7 +84,47 @@ begin
     insert into relatives values (new.usr, 1, "NA", "NA", "NA", "0000");
     insert into enfermedad values (new.usr, 1, "NA", "NA", null, "NA");
     insert into alergia values (new.usr, 1, "NA", "NA", null, "NA");
+    insert into notification values (new.usr, 1, "Completa tus datos en la sección general", 3);
+    insert into notification values (new.usr, 2, "Completa tus Contactos de Emergencia", 1);
+    insert into notification values (new.usr, 3, "Completa tus Familiares Cercanos", 2);
+    insert into notification values (new.usr, 4, "Completa tus datos en la seccion salud", 4);
+    insert into notification values (new.usr, 5, "Informate sobre mas en nuestro Blog", 5);
 end $$
 delimiter $$
 delimiter ;
 
+drop trigger if exists notifG;
+delimiter $$
+create trigger notifG after update on general for each row
+begin 
+    delete from notification where usr = new.usr and descripcion = "Completa tus datos en la sección general";
+end $$
+delimiter $$
+delimiter ;
+
+drop trigger if exists notifEG;
+delimiter $$
+create trigger notifEG after update on emergencyContacts for each row
+begin 
+    delete from notification where usr = new.usr and descripcion = "Completa tus Contactos de Emergencia";
+end $$
+delimiter $$
+delimiter ;
+
+drop trigger if exists notifR;
+delimiter $$
+create trigger notifR after update on relatives for each row
+begin 
+    delete from notification where usr = new.usr and descripcion = "Completa tus Familiares Cercanos";
+end $$
+delimiter $$
+delimiter ;
+
+drop trigger if exists notifHE;
+delimiter $$
+create trigger notifHE after update on alergia for each row
+begin 
+    delete from notification where usr = new.usr and descripcion = "Completa tus datos en la seccion salud";
+end $$
+delimiter $$
+delimiter ;

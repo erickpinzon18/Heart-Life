@@ -1,3 +1,4 @@
+<%@page import="modelos.Notifications"%>
 <%@page import="modelos.Relatives"%>
 <%@page import="modelos.EmergencyContacts"%>
 <%@page import="java.util.List"%>
@@ -13,7 +14,9 @@
     Conexion c = new Conexion();
     String user = (String) session.getAttribute("user");
     List <Relatives> lista = c.mostrarRelatives(user);
+    List <Notifications> ln = c.mostrarNotifications(user);
     int max = c.maxRelatives(user);
+    int maxN = c.maxNotifications(user);
 %>
 <!doctype html>
 <html lang="en">
@@ -66,7 +69,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="emergencyContacts.jsp">
                     <i class="fas fa-fw fa-phone"></i>
                     <span>Contactos Emergencia</span>
@@ -74,7 +77,7 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="relatives.jsp">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Familiares Cercanos</span>
@@ -99,13 +102,21 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link">
-                    <i class="fas fa-fw fa-random"></i>
-                    <span>Otros</span></a>
+                <a class="nav-link" href="healt.jsp">
+                    <i class="fas fa-fw fa-heart"></i>
+                    <span>Salud</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+            
+            <center>
+                <li class="nav-item">
+                    <a class="btn btn-warning btn-lg" href="mail.jsp">
+                        <span>EMERGENCIA</span>
+                    </a>
+                </li>
+            </center>
 
         </ul>
         <!-- End of Sidebar -->
@@ -120,18 +131,20 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Topbar Search -->
-                    <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" autocomplete="off">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Escribe lo que estas buscando"
-                                   aria-label="Search" aria-describedby="basic-addon2" list="datalistOptions" id="exampleDataList">
+                                   aria-label="Search" aria-describedby="basic-addon2" list="datalistOptions" id="dataList" onchange="redirect()">
                             <datalist id="datalistOptions">
-                                <option onclick="" value="Usuario">
+                                <option value="Usuario">
                                 <option value="Correo">
+                                <option value="Tipo de Sangre">    
                                 <option value="Domicilio">
-                                <option value="Contactos de Emergenica">
+                                <option value="Contactos de Emergencia">
                                 <option value="Familiares Cercanos">
-                                <option value="Seguridad">                                    
+                                <option value="Seguridad">
+                                <option value="Enfermedades">
+                                <option value="Alergias">
                             </datalist>
                             <div class="input-group-append">
                                 <div class="btn btn-danger">
@@ -153,32 +166,51 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropstart no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
+                               data-bs-toggle="dropdown"  aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter"><%=maxN%></span>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item disabled text-danger">
+                                        NOTIFICACIONES
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <%
+                                    String url = "";
+                                    for (int i = 0; i < ln.size(); i++) {
+                                        switch (ln.get(i).getGrado()) {
+                                            case 1: url = "emergencyContacts.jsp"; break;
+                                            case 2: url = "relatives.jsp"; break;
+                                            case 3: url = "general.jsp"; break;
+                                            case 4: url = "healt.jsp"; break;
+                                            case 5: url = "../blog.jsp"; break;
+                                        }
+                                %>
+                                <li>
+                                    <a class="dropdown-item" href="<%=url%>" id="notif<%=ln.get(i).getnNotif()%>">
+                                        <%=ln.get(i).getDesc()%>
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <%
+                                    }
+                                %>
+                                
+                            </ul>
                         </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                        </li>
-
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=session.getAttribute("user")%></span>
                                 <img class="img-profile rounded-circle" src="https://img.icons8.com/ios/50/undefined/user--v1.png">
                             </a>
                         </li>
@@ -392,6 +424,20 @@
         $("#direcModalRm").val($("#direc"+id).text());
         $("#numModalRm").val($("#num"+id).text());
     }   
+    function redirect() {
+        switch ($("#dataList").val().toUpperCase()) {
+            case "USUARIO": window.location.replace("general.jsp"); break;  
+            case "CORREO": window.location.replace("general.jsp"); break;  
+            case "TIPO DE SANGRE": window.location.replace("general.jsp"); break;  
+            case "DOMICILIO": window.location.replace("general.jsp"); break;   
+            case "CONTACTOS DE EMERGENCIA": window.location.replace("emergencyContacts.jsp"); break;   
+            case "FAMILIARES CERCANOS": window.location.replace("relatives.jsp"); break;   
+            case "SEGURIDAD": window.location.replace("security.jsp"); break;   
+            case "ENFERMEDADES": window.location.replace("healt.jsp"); break;   
+            case "ALERGIAS": window.location.replace("healt.jsp"); break;   
+            default: $("#dataList").val("");
+        }
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
