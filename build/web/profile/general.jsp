@@ -100,13 +100,22 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link" href="healt.jsp">
                     <i class="fas fa-fw fa-random"></i>
-                    <span>Otros</span></a>
+                    <span>Salud</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+            
+            <!-- Nav Item - Charts -->
+            <center>
+                <li class="nav-item">
+                    <a class="btn btn-warning" href="mail.jsp">
+                        <span>EMERGENCIA</span>
+                    </a>
+                </li>
+            </center>
 
         </ul>
         <!-- End of Sidebar -->
@@ -153,34 +162,39 @@
                             </div>
                             
                             <div class="form-group"> <!-- Full Name -->
+                                <label for="name" class="control-label">Tipo de Sangre</label>
+                                <input type="text" class="form-control" id="sangre" name="sangre" placeholder="Tipo de Sangre" value="<%=lg.get(0).getSangre()%>" maxlength="5">
+                            </div>
+                                
+                             <div class="form-group"> <!-- Full Name -->
                                 <label for="name" class="control-label">Usuario</label>
-                                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre" value="<%=lu.get(0).getUsuario()%>" onchange="validUser()">
+                                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre" value="<%=lu.get(0).getUsuario()%>" onchange="validUser()" maxlength="25">
                                 <label id="userAlert" style="display: none;"></label>
                             </div>
                             
                             <div class="form-group"> <!-- Full Name -->
                                 <label for="name_id" class="control-label">Correo</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<%=lu.get(0).getCorreo()%>">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<%=lu.get(0).getCorreo()%>" maxlength="50">
                             </div>
 
                             <div class="form-group"> <!-- Street 1 -->
                                 <label for="street1_id" class="control-label">Direccion</label>
-                                <input type="text" class="form-control" id="direc" name="direc" placeholder="Calle, #, Colonia, CP"  value="<%=lg.get(0).getDirec()%>">
+                                <input type="text" class="form-control" id="direc" name="direc" placeholder="Calle, #, Colonia, CP"  value="<%=lg.get(0).getDirec()%>" maxlength="100">
                             </div>
 
                             <div class="form-group"> <!-- City-->
                                 <label for="city_id" class="control-label">Ciudad</label>
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad"  value="<%=lg.get(0).getCiudad()%>">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad"  value="<%=lg.get(0).getCiudad()%>" maxlength="100">
                             </div>
 
                             <div class="form-group"> <!-- State Button -->
                                 <label for="state_id" class="control-label">Estado</label>
-                                <input type="text" class="form-control" id="estado" name="estado" value="<%=lg.get(0).getEstado()%>">
+                                <input type="text" class="form-control" id="estado" name="estado" value="<%=lg.get(0).getEstado()%>" maxlength="100">
                             </div>
 
                             <div class="form-group"> <!-- Zip Code-->
                                 <label for="zip_id" class="control-label">Codigo Postal</label>
-                                <input type="number" class="form-control" id="cp" name="cp" placeholder="#####" value="<%=lg.get(0).getCp()%>">
+                                <input type="number" class="form-control" id="cp" name="cp" placeholder="#####" value="<%=lg.get(0).getCp()%>" maxlength="7">
                             </div>
 
                             <div class="form-group"> <!-- Zip Code-->

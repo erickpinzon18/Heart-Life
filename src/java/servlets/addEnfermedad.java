@@ -2,16 +2,15 @@ package servlets;
 
 import bd.Conexion;
 import java.io.IOException;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelos.EmergencyContacts;
+import modelos.Enfermedad;
 
-@WebServlet(name = "addEmergency", urlPatterns = {"/profile/addEmergency"})
-public class addEmergency extends HttpServlet {
+@WebServlet(name = "addEnfermedad", urlPatterns = {"/profile/addEnfermedad"})
+public class addEnfermedad extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -19,19 +18,19 @@ public class addEmergency extends HttpServlet {
         String user = request.getParameter("user");        
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String direc = request.getParameter("direc");
-        String num = request.getParameter("num");
+        String grav = request.getParameter("grav");
+        String fec_det = request.getParameter("fec_det");
+        String trat = request.getParameter("trat");
         
         Conexion c = new Conexion();
-        EmergencyContacts e = new EmergencyContacts();
+        Enfermedad e = new Enfermedad();
         e.setUser(user);
-        e.setnContacto(id);
+        e.setnEnfer(id);
         e.setNombre(name);
-        e.setEmail(email);
-        e.setDirec(direc);
-        e.setNumero(num);
-        c.insertarEmergency(e);
-        response.sendRedirect("emergencyContacts.jsp");
+        e.setGravedad(grav);
+        e.setFec_det(fec_det);
+        e.setTratado(trat);
+        c.insertarEnfermedad(e);
+        response.sendRedirect("healt.jsp");
     }
 }

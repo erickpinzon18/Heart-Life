@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelos.Alergia;
 import modelos.EmergencyContacts;
+import modelos.Enfermedad;
 import modelos.General;
+import modelos.Relatives;
 import modelos.Usuario;
 
 public class Conexion {
@@ -39,7 +42,6 @@ public class Conexion {
     }
     
     public boolean validarEnBD (String col, String value) {
-        //Cambiar esto jeje
         String sql = "SELECT "+col+" FROM USERH WHERE "+col+ " = '"+value+"'";
         System.out.println(sql);
         boolean exists = false;
@@ -153,6 +155,7 @@ public class Conexion {
                 g.setDirec(rs.getString("direccion"));
                 g.setCiudad(rs.getString("ciudad"));
                 g.setEstado(rs.getString("estado"));
+                g.setSangre(rs.getString("sangre"));
                 g.setCp(rs.getInt("cp"));
                 lista.add(g);
             }
@@ -169,6 +172,7 @@ public class Conexion {
                 + "direccion = '"+g.getDirec()+"',"
                 + "ciudad = '"+g.getCiudad()+"',"
                 + "cp = "+g.getCp()+","
+                + "sangre = '"+g.getSangre()+"',"
                 + "estado = '"+g.getEstado()+"'"
                 + " where usr = '"+g.getUser()+"'";
         System.out.println(sql);
@@ -228,7 +232,7 @@ public class Conexion {
     
     public int modificarEmergency (EmergencyContacts e) {
         String sql = "UPDATE emergencyContacts set "
-                + "nContacto = '"+e.getnContacto()+"',"
+                + "nContacto = "+e.getnContacto()+","
                 + "nombre = '"+e.getNombre()+"',"
                 + "email = '"+e.getEmail()+"',"
                 + "numero = '"+e.getNumero()+"',"
@@ -247,7 +251,6 @@ public class Conexion {
     }
     
     public int eliminarEmergency (EmergencyContacts e) {
-        //System.out.println(u.getFec_nac());
         String sql = "DELETE FROM emergencyContacts WHERE usr ='"+e.getUser()+"' and nContacto = "+e.getnContacto();
         try {
             conectar();
@@ -279,10 +282,294 @@ public class Conexion {
         }
     }
     
+    public int insertarRelatives (Relatives r) {
+        String sql = "INSERT INTO relatives values "
+                + "('"+r.getUsuario()+"',"
+                + ""+r.getnRelative()+","
+                + "'"+r.getNombre()+"',"                
+                + "'"+r.getParentezco()+"',"
+                + "'"+r.getDirec()+"',"
+                + "'"+r.getNum()+"')";
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar registro en relatives: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
     
+    public List<Relatives> mostrarRelatives(String user) {
+        List <Relatives> lista = new ArrayList<>();
+        String sql = "Select * from relatives WHERE usr = '"+user+"'";
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            while (rs.next()) {
+                Relatives r = new Relatives();
+                r.setNombre(rs.getString("nombre"));
+                r.setUsuario(rs.getString("usr"));
+                r.setnRelative(rs.getInt("nRelative"));
+                r.setParentezco(rs.getString("parentezco"));
+                r.setDirec(rs.getString("direc"));
+                r.setNum(rs.getString("numero"));
+                lista.add(r);
+            }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los datos de MySQL en la tabla relatives: "+ex+" , SQL: "+sql);
+            lista = null;
+        }
+        return lista;
+    }
+    
+    public int modificarRelatives (Relatives r) {
+        String sql = "UPDATE relatives set "
+                + "nRelative = "+r.getnRelative()+","
+                + "nombre = '"+r.getNombre()+"',"
+                + "parentezco = '"+r.getParentezco()+"',"
+                + "numero = '"+r.getNum()+"',"
+                + "direc = '"+r.getDirec()+"'"
+                + " where usr = '"+r.getUsuario()+"' and nRelative = "+r.getnRelative();
+        System.out.println(sql);
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar registro de relatives: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public int eliminarRelatives (Relatives r) {
+        String sql = "DELETE FROM relatives WHERE usr ='"+r.getUsuario()+"' and nRelative = "+r.getnRelative();
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar registro de relatives: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public int maxRelatives (String user) {
+        String sql = "SELECT max(nRelative)+1 max FROM relatives WHERE usr = '"+user+"'";
+        int max = 0;
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    max = rs.getInt("max");
+                }
+            }
+            desconectar();
+            return max;
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar maxRelatives: "+ ex +" | SQL: "+ sql);
+            return max;
+        }
+    }
+    
+    public int insertarEnfermedad (Enfermedad e) {
+        String sql = "INSERT INTO Enfermedad (usr, nEnfer, nombre, gravedad, fec_det, tratado) values "
+                + "('"+e.getUser()+"',"
+                + ""+e.getnEnfer()+","
+                + "'"+e.getNombre()+"',"                
+                + "'"+e.getGravedad()+"',"
+                + "'"+e.getFec_det()+"',"
+                + "'"+e.getTratado()+"')";
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar registro en Enfermedad: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public List<Enfermedad> mostrarEnfermedad(String user) {
+        List <Enfermedad> lista = new ArrayList<>();
+        String sql = "Select * from enfermedad WHERE usr = '"+user+"'";
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            while (rs.next()) {
+                Enfermedad e = new Enfermedad();
+                e.setNombre(rs.getString("nombre"));
+                e.setUser(rs.getString("usr"));
+                e.setnEnfer(rs.getInt("nEnfer"));
+                e.setGravedad(rs.getString("gravedad"));
+                e.setFec_det(rs.getString("fec_det"));
+                e.setTratado(rs.getString("tratado"));
+                lista.add(e);
+            }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los datos de MySQL en la tabla Enfermedad: "+ex+" , SQL: "+sql);
+            lista = null;
+        }
+        return lista;
+    }
+    
+    public int modificarEnfermedad (Enfermedad e) {
+        String sql = "UPDATE enfermedad set "
+                + "nEnfer = "+e.getnEnfer()+","
+                + "nombre = '"+e.getNombre()+"',"
+                + "gravedad = '"+e.getGravedad()+"',"
+                + "fec_det = '"+e.getFec_det()+"',"
+                + "tratado = '"+e.getTratado()+"'"
+                + " where usr = '"+e.getUser()+"' and nEnfer = "+e.getnEnfer();
+        System.out.println(sql);
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar registro de Enfermedad: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public int eliminarEnfermedad (Enfermedad e) {
+        String sql = "DELETE FROM enfermedad WHERE usr ='"+e.getUser()+"' and nEnfer = "+e.getnEnfer();
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar registro de enfermedad: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public int maxEnfermedad (String user) {
+        String sql = "SELECT max(nEnfer)+1 max FROM enfermedad WHERE usr = '"+user+"'";
+        int max = 0;
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    max = rs.getInt("max");
+                }
+            }
+            desconectar();
+            return max;
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar maxEnfermedad: "+ ex +" | SQL: "+ sql);
+            return max;
+        }
+    }
+    
+    public int insertarAlergia (Alergia a) {
+        String sql = "INSERT INTO alergia (usr, nAlergia, nombre, gravedad, fec_det, tratado) values "
+                + "('"+a.getUser()+"',"
+                + ""+a.getnAler()+","
+                + "'"+a.getNombre()+"',"                
+                + "'"+a.getGravedad()+"',"
+                + "'"+a.getFec_det()+"',"
+                + "'"+a.getTratado()+"')";
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar registro en Alergia: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public List<Alergia> mostrarAlergia(String user) {
+        List <Alergia> lista = new ArrayList<>();
+        String sql = "Select * from alergia WHERE usr = '"+user+"'";
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            while (rs.next()) {
+                Alergia a = new Alergia();
+                a.setNombre(rs.getString("nombre"));
+                a.setUser(rs.getString("usr"));
+                a.setnAler(rs.getInt("nAlergia"));
+                a.setGravedad(rs.getString("gravedad"));
+                a.setFec_det(rs.getString("fec_det"));
+                a.setTratado(rs.getString("tratado"));
+                lista.add(a);
+            }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los datos de MySQL en la tabla Alergia: "+ex+" , SQL: "+sql);
+            lista = null;
+        }
+        return lista;
+    }
+    
+    public int modificarAlergia (Alergia a) {
+        String sql = "UPDATE alergia set "
+                + "nAlergia = "+a.getnAler()+","
+                + "nombre = '"+a.getNombre()+"',"
+                + "gravedad = '"+a.getGravedad()+"',"
+                + "fec_det = '"+a.getFec_det()+"',"
+                + "tratado = '"+a.getTratado()+"'"
+                + " where usr = '"+a.getUser()+"' and nAlergia = "+a.getnAler();
+        System.out.println(sql);
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar registro de Alergia: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public int eliminarAlergia (Alergia a) {
+        String sql = "DELETE FROM alergia WHERE usr ='"+a.getUser()+"' and nAlergia = "+a.getnAler();
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            return regs;
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar registro de Alergia: "+ ex +" | SQL: "+ sql);
+            return 0;
+        }
+    }
+    
+    public int maxAlergia (String user) {
+        String sql = "SELECT max(nAlergia)+1 max FROM Alergia WHERE usr = '"+user+"'";
+        int max = 0;
+        try {
+            conectar();
+            rs = smt.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    max = rs.getInt("max");
+                }
+            }
+            desconectar();
+            return max;
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar maxAlergia: "+ ex +" | SQL: "+ sql);
+            return max;
+        }
+    }
     
     public boolean login (String pass, String user) {
         String sql = "SELECT pass FROM USERH WHERE usr = '"+user+"'";
+        System.out.println(sql);
         boolean logBD = false;
         try {
             conectar();
@@ -303,6 +590,20 @@ public class Conexion {
         }
     }
     
-    // Buscar usuario
-    
+    public boolean changePassword (String pass, String user) {
+        String sql = "Update userh set pass = '"+pass+"' where usr = '"+user+"'";
+        System.out.println(sql);
+        boolean logBD = false;
+        try {
+            conectar();
+            int regs;
+            regs = smt.executeUpdate(sql);
+            logBD = true;
+            desconectar();
+            return logBD;
+        } catch (SQLException ex) {
+            System.out.println("Error al cambiar pass: "+ ex +" | SQL: "+ sql);
+            return false;
+        }
+    }
 }

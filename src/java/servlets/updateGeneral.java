@@ -28,6 +28,7 @@ public class updateGeneral extends HttpServlet {
         g.setDirec(request.getParameter("direc"));
         g.setCiudad(request.getParameter("city"));
         g.setEstado(request.getParameter("estado"));
+        g.setSangre(request.getParameter("sangre"));
         g.setCp(Integer.parseInt(request.getParameter("cp")));
         c.modificarUsuario(u);
         c.modificarGeneral(g);

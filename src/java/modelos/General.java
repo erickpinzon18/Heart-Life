@@ -1,9 +1,17 @@
 package modelos;
 
 public class General {
-    private String user, direc, estado, ciudad;
+    private String user, direc, estado, ciudad, sangre;
     private int cp;
 
+    public String getSangre() {
+        return sangre;
+    }
+
+    public void setSangre(String sangre) {
+        this.sangre = sangre;
+    }
+    
     public General() {
     }
 

@@ -256,19 +256,19 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Nombre</label>
-                        <input type="text" name="name" id="nameModal" class="form-control">             
+                        <input type="text" name="name" id="nameModal" class="form-control" required maxlength="100" minlength="2">             
                     </div>
                     <div class="form-group">
                         <label class="control-label">Email</label>
-                        <input type="text" name="email" id="emailModal" class="form-control">             
+                        <input type="text" name="email" id="emailModal" class="form-control" required maxlength="100" minlength="2">             
                     </div>
                     <div class="form-group">
                         <label class="control-label">Direccion</label>
-                        <input type="text" name="direc" id="direcModal" class="form-control">             
+                        <input type="text" name="direc" id="direcModal" class="form-control" required maxlength="100" minlength="2">             
                     </div>
                     <div class="form-group">
                         <label class="control-label">Numero</label>
-                        <input type="text" name="num" id="numModal" class="form-control">             
+                        <input type="text" name="num" id="numModal" class="form-control" required maxlength="12" minlength="10">             
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -300,19 +300,19 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Nombre</label>
-                        <input type="text" name="name" id="nameModalAdd" class="form-control">             
+                        <input type="text" name="name" id="nameModalAdd" class="form-control" required maxlength="100" minlength="2">             
                     </div>
                     <div class="form-group">
                         <label class="control-label">Email</label>
-                        <input type="text" name="email" id="emailModalAdd" class="form-control">             
+                        <input type="text" name="email" id="emailModalAdd" class="form-control" required maxlength="100" minlength="2">             
                     </div>
                     <div class="form-group">
                         <label class="control-label">Direccion</label>
-                        <input type="text" name="direc" id="direcModalAdd" class="form-control">             
+                        <input type="text" name="direc" id="direcModalAdd" class="form-control" required maxlength="100" minlength="2">             
                     </div>
                     <div class="form-group">
                         <label class="control-label">Numero</label>
-                        <input type="text" name="num" id="numModalAdd" class="form-control">             
+                        <input type="text" name="num" id="numModalAdd" class="form-control" required maxlength="12" minlength="10">             
                     </div>
                 </div>
                 <div class="modal-footer">

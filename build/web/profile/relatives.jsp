@@ -1,7 +1,19 @@
+<%@page import="modelos.Relatives"%>
+<%@page import="modelos.EmergencyContacts"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="bd.Conexion"%>
 <%
     if(session.getAttribute("user") == null) {
         response.sendRedirect("../index.jsp");
     }
+    
+    //Relleno de datos
+    Conexion c = new Conexion();
+    String user = (String) session.getAttribute("user");
+    List <Relatives> lista = c.mostrarRelatives(user);
+    int max = c.maxRelatives(user);
 %>
 <!doctype html>
 <html lang="en">
@@ -19,7 +31,6 @@
           rel="stylesheet">
 </head>
 <body>
-
 <div>
 
     <!-- Page Wrapper -->
@@ -55,7 +66,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="emergencyContacts.jsp">
                     <i class="fas fa-fw fa-phone"></i>
                     <span>Contactos Emergencia</span>
@@ -63,7 +74,7 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="relatives.jsp">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Familiares Cercanos</span>
@@ -112,12 +123,20 @@
                     <form
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Escribe lo que estas buscando"
+                                   aria-label="Search" aria-describedby="basic-addon2" list="datalistOptions" id="exampleDataList">
+                            <datalist id="datalistOptions">
+                                <option onclick="" value="Usuario">
+                                <option value="Correo">
+                                <option value="Domicilio">
+                                <option value="Contactos de Emergenica">
+                                <option value="Familiares Cercanos">
+                                <option value="Seguridad">                                    
+                            </datalist>
                             <div class="input-group-append">
-                                <button class="btn btn-danger" type="button">
+                                <div class="btn btn-danger">
                                     <i class="fas fa-search fa-sm"></i>
-                                </button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -177,7 +196,7 @@
                                             <h2>Administrar <b>Familiares Cercanos</b></h2>
                                         </div>
                                         <div class="col-sm-4 text-right">
-                                            <a href="#addModal" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i class="material-icons"></i> <span>Agregar</span></a>
+                                            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAdd">Agregar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -186,62 +205,35 @@
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Parentezco</th>
-                                        <th>Dirección</th>
-                                        <th>Número</th>
+                                        <th>Direccion</th>
+                                        <th>Numero</th>
                                         <th>Acciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Thomas Hardy</td>
-                                        <td>Father</td>
-                                        <td>89 Chiaroscuro Rd, Portland, USA</td>
-                                        <td>(171) 555-2222</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dominique Perrier</td>
-                                        <td>Mom</td>
-                                        <td>Obere Str. 57, Berlin, Germany</td>
-                                        <td>(313) 555-5735</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>Sister</td>
-                                        <td>25, rue Lauriston, Paris, France</td>
-                                        <td>(503) 555-9931</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fran Wilson</td>
-                                        <td>Brother</td>
-                                        <td>C/ Araquil, 67, Madrid, Spain</td>
-                                        <td>(204) 619-5731</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Martin Blank</td>
-                                        <td>Cousin</td>
-                                        <td>Via Monte Bianco 34, Turin, Italy</td>
-                                        <td>(480) 631-2097</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>
-                                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
-                                        </td>
-                                    </tr>
+                                    <%
+                                        for (int i = 0; i < lista.size(); i++) {
+                                    %>
+                                        <tr>
+                                            <td style="display: none;"> <p id="nContacto"><%=lista.get(i).getnRelative()%></p></td>
+                                            <td> <p id="name<%=lista.get(i).getnRelative()%>"><%=lista.get(i).getNombre()%></p></td>
+                                            <td> <p id="paren<%=lista.get(i).getnRelative()%>"><%=lista.get(i).getParentezco()%></p></td>
+                                            <td> <p id="direc<%=lista.get(i).getnRelative()%>"><%=lista.get(i).getDirec()%></p></td>
+                                            <td> <p id="num<%=lista.get(i).getnRelative()%>"><%=lista.get(i).getNum()%></p></td>
+                                            <td>
+                                                <a type="button" class="btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit" 
+                                                    onclick="editContact(<%=lista.get(i).getnRelative()%>)">
+                                                   Editar
+                                                </a>
+                                                <a type="button" class="btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
+                                                    onclick="deleteContact(<%=lista.get(i).getnRelative()%>)">
+                                                    Borrar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <%
+                                        }
+                                    %>
                                     </tbody>
                                 </table>
                             </div>
@@ -249,156 +241,162 @@
                     </div>
                 </div>
             </div>
-            <!-- End of Content Wrapper -->
         </div>
     </div>
-
-
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Appointment Informations</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
-                </button>
+                <h5 class="modal-title" id="staticBackdropLabel">Modificar Familiar Cercano</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="row g-0">
-                    <div class="col-md-8 border-right">
-                        <div class="status p-3">
-                            <table class="table table-borderless">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Hospital</span>
-                                            <span class="subheadings">Cairo Hospital</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Time/Date</span>
-                                            <span class="subheadings">5:00PM 3-12-2020</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Status</span>
-                                            <span class="subheadings"><i class="dots"></i> Booked</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Speciality</span>
-                                            <span class="subheadings">Dental Clinic</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Referring Doctor</span>
-                                            <span class="subheadings">Dr. Harry Pimn</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Contact</span>
-                                            <span class="subheadings">52, Maria Block, Victoria Road, CA USA</span>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Reason of visiting</span>
-                                            <span class="subheadings">Lorem ipsum is placeholder text commonly used in the graphic, print.</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Direction</span>
-                                            <span class="d-block subheadings">Get direction by using</span>
-                                            <span class="d-flex flex-row">
-                                        <img src="https://img.icons8.com/color/100/000000/google-maps.png" class="rounded" width="30" />
-                                        <img src="https://img.icons8.com/color/100/000000/pittsburgh-map.png" class="rounded" width="30" />
-                                    </span>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Hospital Gallary</span>
-                                            <span class="d-flex flex-row gallery">
-                                        <img src="https://i.imgur.com/VfRSLTm.jpg" width="50" class="rounded">
-                                        <img src="https://i.imgur.com/jb9Cy5h.jpg" width="50" class="rounded">
-                                        <img src="https://i.imgur.com/vBUz4HA.jpg" width="50" class="rounded">
-                                    </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+            <form action="updateRelatives" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">User</label>
+                        <input type="text" name="user" id="userModal" class="form-control" value="<%=user%>" readonly>             
                     </div>
-                    <div class="col-md-4">
-                        <div class="p-2 text-center">
-                            <div class="profile">
-                                <img src="https://i.imgur.com/VfRSLTm.jpg" width="100" class="rounded-circle img-thumbnail">
-                                <span class="d-block mt-3 font-weight-bold">Dr. Samsung Philip.</span>
-                            </div>
-                            <div class="about-doctor">
-                                <table class="table table-borderless">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Education</span>
-                                                <span class="subheadings">University of Harward</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Language</span>
-                                                <span class="subheadings">Spanish, English</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Organisation</span>
-                                                <span class="subheadings">Accupunture</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Specialist</span>
-                                                <span class="subheadings">Accupunture</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label class="control-label">ID Contacto</label>
+                        <input type="text" name="id" id="idModal" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nombre</label>
+                        <input type="text" name="name" id="nameModal" class="form-control" required maxlength="100" minlength="2">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Parentezco</label>
+                        <input type="text" name="paren" id="parenModal" class="form-control" required maxlength="100" minlength="2">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Direccion</label>
+                        <input type="text" name="direc" id="direcModal" class="form-control" required maxlength="100" minlength="2">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Numero</label>
+                        <input type="text" name="num" id="numModal" class="form-control" required maxlength="12" minlength="10">             
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+                    
+<!-- Modal Agregar -->
+<div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Agregar Familiar Cercano</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="addRelatives" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">User</label>
+                        <input type="text" name="user" id="userModalAdd" class="form-control" value="<%=user%>" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">ID Contacto</label>
+                        <input type="text" name="id" id="idModalAdd" class="form-control" value="<%=max%>" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nombre</label>
+                        <input type="text" name="name" id="nameModalAdd" class="form-control" required maxlength="100" minlength="2">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Parentezco</label>
+                        <input type="text" name="paren" id="parenModalAdd" class="form-control" required maxlength="100" minlength="2">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Direccion</label>
+                        <input type="text" name="direc" id="direcModalAdd" class="form-control" required maxlength="100" minlength="2">             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Numero</label>
+                        <input type="text" name="num" id="numModalAdd" class="form-control" required maxlength="12" minlength="10">             
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+<!-- Modal Eliminar -->
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar Familiar Cercano</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="removeRelatives" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">User</label>
+                        <input type="text" name="user" id="userModalRm" class="form-control" value="<%=user%>" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">ID Contacto</label>
+                        <input type="text" name="id" id="idModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nombre</label>
+                        <input type="text" name="name" id="nameModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Parentezco</label>
+                        <input type="text" name="paren" id="parenModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Direccion</label>
+                        <input type="text" name="direc" id="direcModalRm" class="form-control" readonly>             
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Numero</label>
+                        <input type="text" name="num" id="numModalRm" class="form-control" readonly>             
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+    function editContact(id) {
+        $("#idModal").val(id);
+        $("#nameModal").val($("#name"+id).text());
+        $("#parenModal").val($("#paren"+id).text());
+        $("#direcModal").val($("#direc"+id).text());
+        $("#numModal").val($("#num"+id).text());
+    }   
+    function deleteContact(id) {
+        $("#idModalRm").val(id);
+        $("#nameModalRm").val($("#name"+id).text());
+        $("#parenModalRm").val($("#paren"+id).text());
+        $("#direcModalRm").val($("#direc"+id).text());
+        $("#numModalRm").val($("#num"+id).text());
+    }   
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+
 </body>
 </html>

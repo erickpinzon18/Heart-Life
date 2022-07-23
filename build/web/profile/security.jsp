@@ -169,25 +169,35 @@
 
                 <div class="container row">
                     <div class="col-8 container">
-                        <form>
-
+                        <form method="POST">
                             <div class="form-group"> <!-- Full Name -->
-                                <label for="email_id" class="control-label">Correo</label>
-                                <input type="email" class="form-control" id="email_id" name="email" placeholder="Email">
+                                <label for="pass_old" class="control-label">Usuario</label>
+                                <input type="text" readonly class="form-control" id="user" name="user" value="<%=session.getAttribute("user")%>">
                             </div>
-
                             <div class="form-group"> <!-- Full Name -->
-                                <label for="pass_id" class="control-label">ContraseÃ±a</label>
-                                <input type="password" class="form-control" id="pass_id" name="pass" placeholder="Password">
+                                <label for="pass_old" class="control-label">Contraseña Anterior</label>
+                                <input type="password" class="form-control" id="pass_old" name="pass_old" placeholder="Contraseña anterior">
+                            </div>
+                            <label id="userAlert" style="display: none;"></label>
+                            <div class="form-group"> <!-- Full Name -->
+                                <label for="pass_id" class="control-label">Contraseña Nueva</label>
+                                <input type="password" class="form-control form-control-user"
+                                           id="pass1" placeholder="Password">
                             </div>
 
                             <div class="form-group"> <!-- Street 1 -->
-                                <label for="passr_id" class="control-label">Repita ContraseÃ±a</label>
-                                <input type="password" class="form-control" id="passr_id" name="passr" placeholder="Repeat Password">
+                                <label for="passr_id" class="control-label">Repita Contraseña</label>
+                                <input type="password" class="form-control form-control-user"
+                                           id="pass2" placeholder="Repetir Password" name="pass2" onchange=" 
+                                            //Verificar que las contraseÃ±as coincidan
+                                            if(document.getElementById('pass1').value != document.getElementById('pass2').value) {
+                                                alert('Las contraseÃ±as no coinciden');
+                                                document.getElementById('pass2').value = '';
+                                            }">
                             </div>
 
                             <div class="form-group text-right"> <!-- Submit Button -->
-                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <button onclick="validPass()" class="btn btn-success">Guardar</button>
                                 <button type="reset" class="btn btn-outline-danger">Cancelar</button>
                             </div>
 
@@ -222,7 +232,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
-                                    <h6 class="my-0">Verificar que se guardÃ³</h6>
+                                    <h6 class="my-0">Verificar que se guardó</h6>
                                     <small class="text-muted">Verifica que tus datos se hayan guardado correctamente
                                         despues de cualquier cambio</small>
                                 </div>
@@ -234,153 +244,31 @@
             <!-- End of Content Wrapper -->
         </div>
     </div>
-
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Appointment Informations</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row g-0">
-                    <div class="col-md-8 border-right">
-                        <div class="status p-3">
-                            <table class="table table-borderless">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Hospital</span>
-                                            <span class="subheadings">Cairo Hospital</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Time/Date</span>
-                                            <span class="subheadings">5:00PM 3-12-2020</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Status</span>
-                                            <span class="subheadings"><i class="dots"></i> Booked</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Speciality</span>
-                                            <span class="subheadings">Dental Clinic</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Referring Doctor</span>
-                                            <span class="subheadings">Dr. Harry Pimn</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Contact</span>
-                                            <span class="subheadings">52, Maria Block, Victoria Road, CA USA</span>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Reason of visiting</span>
-                                            <span class="subheadings">Lorem ipsum is placeholder text commonly used in the graphic, print.</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Direction</span>
-                                            <span class="d-block subheadings">Get direction by using</span>
-                                            <span class="d-flex flex-row">
-                                        <img src="https://img.icons8.com/color/100/000000/google-maps.png" class="rounded" width="30" />
-                                        <img src="https://img.icons8.com/color/100/000000/pittsburgh-map.png" class="rounded" width="30" />
-                                    </span>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div class="d-flex flex-column">
-                                            <span class="heading d-block">Hospital Gallary</span>
-                                            <span class="d-flex flex-row gallery">
-                                        <img src="https://i.imgur.com/VfRSLTm.jpg" width="50" class="rounded">
-                                        <img src="https://i.imgur.com/jb9Cy5h.jpg" width="50" class="rounded">
-                                        <img src="https://i.imgur.com/vBUz4HA.jpg" width="50" class="rounded">
-                                    </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-2 text-center">
-                            <div class="profile">
-                                <img src="https://i.imgur.com/VfRSLTm.jpg" width="100" class="rounded-circle img-thumbnail">
-                                <span class="d-block mt-3 font-weight-bold">Dr. Samsung Philip.</span>
-                            </div>
-                            <div class="about-doctor">
-                                <table class="table table-borderless">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Education</span>
-                                                <span class="subheadings">University of Harward</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Language</span>
-                                                <span class="subheadings">Spanish, English</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Organisation</span>
-                                                <span class="subheadings">Accupunture</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-column">
-                                                <span class="heading d-block">Specialist</span>
-                                                <span class="subheadings">Accupunture</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+    function validPass() {
+        var pass = $("#pass_old").val();
+        var pass2 = $("#pass2").val();
+        $.ajax ({
+            url: "../changePassword",
+            data: {
+                pass_old: pass,
+                user: "<%=session.getAttribute("user")%>",
+                pass2: pass2
+            },
+            type: 'POST',
+            success: function (result) {
+                $("#userAlert").html(result);
+            }
+        });
+    }
+</script>        
 </body>
 </html>
