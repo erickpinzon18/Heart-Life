@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/profile/mail.jsp</file>
-            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/src/java/modelos/General.java</file>
             <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/src/java/bd/Conexion.java</file>
-            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/src/java/servlets/updateGeneral.java</file>
-            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/profile/healt.jsp</file>
-            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/profile/general.jsp</file>
+            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/login.jsp</file>
+            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/index.jsp</file>
+            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/about-us.jsp</file>
+            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/buy.jsp</file>
+            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/blog.jsp</file>
+            <file>file:/Users/be/Documents/Erick/3%20Cuatrimestre/Aplicaciones%20Web/NetBeans/HeartLife/web/register.jsp</file>
         </group>
     </open-files>
 </project-private>

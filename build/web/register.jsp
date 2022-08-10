@@ -74,9 +74,9 @@
                                 Registrar Cuenta
                             </button>
                             <hr>
-                            <a href="index.jsp" class="btn btn-google btn-user btn-block">
+                            <!--<a href="index.jsp" class="btn btn-google btn-user btn-block">
                                 <i class="fab fa-google fa-fw"></i> Register with Google
-                            </a>
+                            </a>-->
                             <div class="btn btn-facebook btn-user btn-block" onclick="onLogin();">
                                         <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                             </div>
@@ -98,7 +98,7 @@
     function validUser () {
         var user = $("#user").val();
         $.ajax ({
-            url: "jsp/Login/validarUsuario",
+                url: "jsp/Login/validarUsuario",
             data: {
                 user: user,
                 col: "usr"

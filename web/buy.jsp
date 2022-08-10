@@ -119,9 +119,6 @@
                         <a class="nav-link" href="buy.jsp">Comprar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.jsp">Acerca</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="about-us.jsp">Nosotros</a>
                     </li>
                     <%
@@ -179,7 +176,7 @@
                         Unete a la comunidad de usuarios
                     </h1>
                     <p class="lead">
-                        Crea una cuenta y disfruta de todos los beneficios que tenemos para ti, adem√°s
+                        Crea una cuenta y disfruta de todos los beneficios que tenemos para ti, adem·s
                         configura tu perfil para obtener todas las ventajas que ofrecemos y asi estar
                         mas seguro de salir sin preocupaciones mientras nosotros nos encargamos de
                         cuidate aun cuando tu no puedas hacerlo.
@@ -229,7 +226,7 @@
                                 <div class=" d-inline mr-2">
                                     <i class=" p-2  fa fa-check"></i>
                                 </div>
-                                <h4 class="d-inline small ">Mejor eficiencia de la atenci√≥n.</h4>
+                                <h4 class="d-inline small ">Mejor eficiencia de la atenciÛn.</h4>
                             </div>
                         </div>
                         <div class="col-6 col-md-4">
@@ -237,7 +234,7 @@
                                 <div class=" d-inline mr-2">
                                     <i class=" p-2  fa fa-check"></i>
                                 </div>
-                                <h4 class="d-inline small ">Consulta r√°pida.</h4>
+                                <h4 class="d-inline small ">Consulta r·pida.</h4>
                             </div>
                         </div>
                         <div class="col-6 col-md-4">
@@ -315,7 +312,7 @@
                                                     Confianza
                                                 </h3>
                                                 <p class="text-muted mb-0">
-                                                    Si√©ntete confiado de salir a cualquier lugar que quieras
+                                                    SiÈntete confiado de salir a cualquier lugar que quieras
                                                 </p>
                                             </div>
                                         </div>
@@ -326,7 +323,7 @@
                                         <div class="row align-items-center text-md-center text-lg-left">
                                             <div class="col-12">
                                                 <h3 class="small fw-bold">
-                                                    Ubicaci√≥n
+                                                    UbicaciÛn
                                                 </h3>
                                                 <p class="text-muted mb-0">
                                                     Mantendremos tu ubicacion para pedir ayuda en cuanto lo necesites
@@ -343,7 +340,7 @@
                                                     Ayuda 24/7
                                                 </h3>
                                                 <p class="text-muted mb-0">
-                                                    El servicio estar√° presente las 24 horas del dia
+                                                    El servicio estar· presente las 24 horas del dia
                                                 </p>
                                             </div>
                                         </div>
@@ -363,7 +360,7 @@
                                     <li class="py-2">Vive sin preocupaciones</li>
                                     <li class="py-2">Mantente seguro siempre</li>
                                     <li class="py-2">No te preocupes por tu seguirdad</li>
-                                    <li class="py-2">Tus familiares siempre estar√°n informados</li>
+                                    <li class="py-2">Tus familiares siempre estar·n informados</li>
                                 </ul>
                                 <div class="col text-center mt-md-5">
                                     <a href="#" class="btn btn-lg btn-danger px-5">Comprar ahora</a>
@@ -509,8 +506,8 @@
                 <h3><strong>Acerca de Nosotros</strong></h3>
                 <p>Somos una empresa nacida en 2021, creada por 3 estudiantes que buscan generar
                     los productos de mas alta calidad y accesibilidad en nuestro pais. En Heart-Designs busamos
-                    ayudar a los sectores mas vulnerables poniendo en sus manos tecnolog√≠as sensillas y accesibles
-                    para darles un apoyo m√°s en su salud diaria.</p>
+                    ayudar a los sectores mas vulnerables poniendo en sus manos tecnologÌ≠as sensillas y accesibles
+                    para darles un apoyo m·s en su salud diaria.</p>
                 <p class="text-h3">
                     <a href="#">
                         <i class="fab fa-twitter text-danger" aria-hidden="true"></i>
@@ -532,7 +529,7 @@
         </div>
         <div class="row mt-5">
             <div class="col text-center">
-                ¬© 2022 Heart-Design. All Rights Reserved
+                © 2022 Heart-Design. All Rights Reserved
             </div>
         </div>
     </div>

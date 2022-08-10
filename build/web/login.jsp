@@ -47,23 +47,22 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="pass" name="pass" placeholder="Contraseña" required>
+                                               id="pass" name="pass" placeholder="Contrase�a" required>
                                     </div>
                                     <label id="userAlert" style="display: none;"></label>
                                     <button onclick="login();" class="btn btn-primary btn-user btn-block">
                                         Iniciar Sesion
                                     </button>
                                     <hr>
-                                    <a href="index.jsp" class="btn btn-google btn-user btn-block">
+                                    <!--<a href="index.jsp" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
+                                    </a>-->
                                     <div class="btn btn-facebook btn-user btn-block" onclick="onLogin();">
                                         <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                     </div>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.jsp">Olvidaste tu contraseña?</a>
                                 </div>
                                 <div class="text-center">
                                     <a class="small" href="register.jsp">Registrarse</a>

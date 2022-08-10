@@ -120,9 +120,6 @@
                     <a class="nav-link" href="buy.jsp">Comprar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.jsp">Acerca</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="about-us.jsp">Nosotros</a>
                 </li>
                 <%
@@ -182,7 +179,7 @@
                             <div class="card-body">
                                 <img alt="image" class="img-fluid d-block mx-auto mt-2 mb-4" src="https://img.icons8.com/ios/80/undefined/keyhole-shield.png">
                                 <h4 class="display-5 mt-3 text-white">Seguridad</h4>
-                                <p>Te sentirÃ¡s mÃ¡s seguro al tener una herramienta que pida ayuda por ti en caso de que sufras algÃºn percance.</p>
+                                <p>Te sentirás más seguro al tener una herramienta que pida ayuda por ti en caso de que sufras algún percance.</p>
                             </div>
                         </div>
                     </div>
@@ -191,8 +188,8 @@
                                 <div class="card-body">
                                     <img alt="image" class="img-fluid d-block mx-auto mt-2 mb-4" src="https://img.icons8.com/ios/80/undefined/trust--v1.png">
                                     <h4 class="display-5 mt-3 text-white">Confianza</h4>
-                                    <p>Ten la seguridad de salir a hacer lo que mÃ¡s te gusta, y tener una herramienta que te
-                                        apoye en una situaciÃ³n de crisis. Siempre estaremos contigo.</p>
+                                    <p>Ten la seguridad de salir a hacer lo que más te gusta, y tener una herramienta que te
+                                        apoye en una situación de crisis. Siempre estaremos contigo.</p>
                                 </div>
                             </div>
                     </div>
@@ -229,7 +226,7 @@
                                 <div class="card-body">
                                     <img alt="image" class="img-fluid d-block mx-auto mt-2 mb-4" src="https://img.icons8.com/ios/80/undefined/box-important--v1.png">
                                     <h4 class="display-5 mt-3 text-white">Atencion</h4>
-                                    <p>AtenciÃ³n las 24 horas del dia, los 7 dias de la semana. Contactanos en cualquier momento. </p>
+                                    <p>Atención las 24 horas del dia, los 7 dias de la semana. Contactanos en cualquier momento. </p>
                                 </div>
                             </div>
                     </div>
@@ -246,10 +243,10 @@
                         <img src=" https://images.unsplash.com/photo-1553969546-6f7388a7e07c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80" alt="" class="img-fluid d-sm-none d-md-block d-lg-block mt-5">
                     </div>
                     <div class="col-sm-12 col-md-6 align-content-center      flex-wrap d-flex">
-                        <h1 class="display-4mb-3 mt-5">SiÃ©ntete libre de salir a cualquier lugar sin preocupaciones</h1>
-                        <p class="lead">Con nuestros sensores de caidas y de geolocalizaciÃ³n podras pedir ayuda en cualquier lugar</p>
+                        <h1 class="display-4mb-3 mt-5">Siéntete libre de salir a cualquier lugar sin preocupaciones</h1>
+                        <p class="lead">Con nuestros sensores de caidas y de geolocalización podras pedir ayuda en cualquier lugar</p>
                         <div class="btn-container  mt-1 btn-stack-lg ">
-                            <a class="btn btn-danger  btn-pill btn-lg me-md-3 " href="#" role="button" style=" ">Â¡Ãšnete ahora!</a>
+                            <a class="btn btn-danger  btn-pill btn-lg me-md-3 " href="#" role="button" style=" ">!Cubrete ahora!</a>
                             <div class="mb-1 mt-2 me-3 align-self-right pt-4 d-inline-block">
                                 <a href="#" role="button" class="  p-2 m-2">
                                     <i class="fab fa-twitter fa-lg text-danger" aria-hidden="true"></i>
@@ -275,12 +272,12 @@
         <div class="container mb-5 pb-5 pt-md-5 border-bottom border-grey">
             <div class="row align-items-center justify-content-between ">
                 <div class="col-12 col-md-4 ">
-                    <h2 class="mb-3 mt-5 fw-bold">MÃ¡s sobre nosotros</h2>
-                    <p class="lead">Ve un poco mas sobre nosotros y el porque de este proyecto</p>
+                    <h2 class="mb-3 mt-5 fw-bold">Más sobre los riesgos</h2>
+                    <p class="lead">Ve un poco mas sobre los reisgos y el porque de este proyecto</p>
                 </div>
                 <div class="col-12 col-md-7   mt-4 mt-md-0">
                     <div class="ratio ratio-16x9 shadow-lg">
-                        <iframe class="ratio ratio-16x9" src="https://www.youtube.com/watch?v=b89CnP0Iq30" allowfullscreen=""></iframe>
+                        <iframe class="ratio ratio-16x9" src="https://www.youtube.com/embed/0bHjGQBT9JQ" title="Caídas en adultos mayores" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -305,7 +302,7 @@
                     </div>
                     <h4 class="h5 text-danger">Transparencia</h4>
                     <p>En nuestra empresa buscamos ser claros y conscisos en la informacion que compartimos con
-                    nuestros usuarios, siendo nuestra intenciÃ³n, generar confianza con nuestros clientes y seguridad al
+                    nuestros usuarios, siendo nuestra intención, generar confianza con nuestros clientes y seguridad al
                     momento de escogernos.</p>
                     <a href="about-us.html" class="text-danger">
                         Learn More
@@ -361,7 +358,7 @@
                 <p>Somos una empresa nacida en 2021, creada por 3 estudiantes que buscan generar
                     los productos de mas alta calidad y accesibilidad en nuestro pais. En Heart-Designs busamos
                     ayudar a los sectores mas vulnerables poniendo en sus manos tecnologÃ­as sensillas y accesibles
-                    para darles un apoyo mÃ¡s en su salud diaria.</p>
+                    para darles un apoyo más en su salud diaria.</p>
                 <p class="text-h3">
                     <a href="#">
                         <i class="fab fa-twitter text-danger" aria-hidden="true"></i>
@@ -383,7 +380,7 @@
         </div>
         <div class="row mt-5">
             <div class="col text-center">
-                Â© 2022 Heart-Design. All Rights Reserved
+                © 2022 Heart-Design. All Rights Reserved
             </div>
         </div>
     </div>

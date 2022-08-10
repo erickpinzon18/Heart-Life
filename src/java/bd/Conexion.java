@@ -28,6 +28,7 @@ public class Conexion {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:8889/HeartLife", "root", "root");
+            //con = DriverManager.getConnection("jdbc:mysql://34.125.237.140:3306/HeartLife", "root", "utsjr");
             System.out.println("Conexion realizada correctamente");
             smt = con.createStatement();
         } catch (Exception e) {

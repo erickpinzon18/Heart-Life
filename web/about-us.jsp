@@ -121,9 +121,6 @@
                         <a class="nav-link" href="buy.jsp">Comprar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.jsp">Acerca</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="about-us.jsp">Nosotros</a>
                     </li>
                     <%
@@ -148,16 +145,16 @@
 
 <div class="container main-container">
 
-    <section class="pt-4 pb-3 mt-0 d-flex bg-dark" style="background-image: url(&quot;https://images.unsplash.com/photo-1533664104818-cfdd4f495024?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1920&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=32c7e62a949c88aade414e6a6b1aba46&quot;); min-height: 100vh; background-size: cover;">
+    <section class="pt-4 pb-3 mt-0 d-flex bg-dark" style="background-image: url(https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80); min-height: 100vh; background-size: cover;">
         <div class="container-fluid p-md-4">
             <div class="row    d-flex  h-100 ">
                 <div class="position-relative  w-100 h-25  d-flex">
                     <div class="container-fluid align-self-start   mt-2 mb-2">
                         <div class="row">
-                            <div class="col-12 col-md-3">
-                                <img alt="image" class="d-block rounded img-fluid" src=" image/x-icon" href="assets/img/Logo.png">
+                            <div class="col-10 col-md-1">
+                                <img alt="image" class="d-block rounded img-fluid" src="assets/img/Logo.png" href="assets/img/Logo.png">
                             </div>
-                            <div class="col-9 d-none d-md-block text-right">
+                            <div class="col-11 d-none d-md-block text-right">
                                 <div class="row align-items-center">
                                     <div class="col-12 align-self-center">
                                         <hr class="border border-border-light mt-3">
@@ -171,12 +168,10 @@
                     <div class="container-fluid align-self-center   pt-5 pt-md-1 mb-2">
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-5">
-                                <h3 class="small badge badge-danger text-light">W E L C O M E
+                                <h3 class="small badge badge-danger text-light">B I E N V E N I D O
                                 </h3>
                                 <h1 class="  mb-0 pt-sm-4 text-light font-weight-bold display-5">
-                                    Here is goes cover nice heading</h1>
-                                <a href="#" class="btn   btn-danger btn-lg mt-5">Action button
-                                    &gt;</a>
+                                    Somos la mejor empresa en el sector</h1>
                             </div>
                         </div>
                     </div>
@@ -205,22 +200,22 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> <br>
 
     <section class="pt-0 pb-0">
         <div class="container-fluid m-0 ">
             <div class="row d-md-flex-row  overflow-hidden">
                 <div class="col-md-4  p-0 col-12 bg-light d-flex overflow-hidden ">
                     <div class="card p-0   w-100 h-100 text-light   border-0 ">
-                        <img class="card-img h-100 w-100" src="https://images.unsplash.com/photo-1522724709546-19901cb1818a?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=97bace733cd75edf9ec8b4a2ef1fad7c" alt="Card image">
+                        <img class="card-img h-100 w-100" src="https://images.unsplash.com/photo-1572985025310-cc8cafbbf394?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=682&q=80" alt="Card image">
                         <div class="card-img-overlay p-1 p-md-3    ">
                             <div class="position-relative  w-100 h-25  d-flex">
                                 <div class="container-fluid align-self-start   mt-2 mb-2">
                                     <div class="row">
-                                        <div class="col-5 col-md-3">
-                                            <h4 class="mt-1">mnml</h4>
+                                        <div class="col-7 col-md-5">
+                                            <h4 class="mt-1">Heart Designs</h4>
                                         </div>
-                                        <div class="col-md-9 col-7 text-right">
+                                        <div class="col-md-7 col-7 text-right">
                                             <div class="row align-items-center">
                                                 <div class="col-12 align-self-center">
                                                     <hr class="border border-border-light mt-3">
@@ -255,8 +250,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-5 text-end">
-                                            <a href="#" class="btn btn-outline-light">Hire me
-                                                now</a>
+                                            <a href="#" class="btn btn-outline-light">Buscanos</a>
                                         </div>
                                     </div>
                                 </div>
@@ -269,15 +263,15 @@
                         <div class="row justify-content-md-center">
                             <div class="col-md-8">
                                 <h3 class="small">HEART DESINGS</h3>
-                                <h1 class="  mb-5 pt-md-2 pt-sm-4">Somos empresa l√≠der
-                                    <br>en desarrollo de tecnolog√≠as.
+                                <h1 class="  mb-5 pt-md-2 pt-sm-4">Somos empresa lÌ≠der
+                                    <br>en desarrollo de tecnologÌ≠as.
                                 </h1>
-                                <p>Fundada como una agencia comercial de desarrollo de software, Heart Designs se convirti√≥ r√°pidamente en una empresa
-                                    l√≠der en la programaci√≥n y desarrollo de nuevas tecnolog√≠as que ahora opera en la zona del baj√≠o.
-                                    En la d√©cada de 2020, la agencia comercial original se especializ√≥ en la producci√≥n de aplicaciones web y bases de datos.
-                                    En la actualidad (2022), se pone en marcha la realizaci√≥n de su primer proyecto importante: Heart Life ¬©,
-                                    la cual se encargar√≠a de revolucionar la forma en la que se ayuda a las personas de la tercera edad,
-                                    tambi√©n personas con problemas de sobrepeso, deportistas, personas con discapacidades que necesitan
+                                <p>Fundada como una agencia comercial de desarrollo de software, Heart Designs se convirtiÛ r·pidamente en una empresa
+                                    lÌ≠der en la programaciÛn y desarrollo de nuevas tecnologÌ≠as que ahora opera en la zona del bajÌ≠o.
+                                    En la dÈcada de 2020, la agencia comercial original se especializan en la producciÛn de aplicaciones web y bases de datos.
+                                    En la actualidad (2022), se pone en marcha la realizaciÛn de su primer proyecto importante: Heart Life ©,
+                                    la cual se encargar· de revolucionar la forma en la que se ayuda a las personas de la tercera edad,
+                                    tambiÈn personas con problemas de sobrepeso, deportistas, personas con discapacidades que necesitan
                                     ayuda en un momento inoportuno.
                                 </p>
 
@@ -311,7 +305,7 @@
                                 </div>
                                 <div class="progress mb-3 mt-2">
                                     <div class="progress-bar bg-dark" role="progressbar" style="width: 80%">
-                                        <span class="stacked-label">NodeJs</span>
+                                        <span class="stacked-label">Java</span>
                                     </div>
                                 </div>
                                 <div class="progress mb-3 mt-2">
@@ -334,7 +328,7 @@
                     <div class="card">
                         <img class="card-img-top shadow" src=" https://user-images.githubusercontent.com/65203105/172616006-7a6fd0fc-2302-48e1-bf3c-012d1dd5ef96.jpeg" alt="Profile">
                         <div class="card-body text-center">
-                            <h4 class="card-title">Erick Pinz√≥n Huerta</h4>
+                            <h4 class="card-title">Erick Pinzon Huerta</h4>
                             <p class="card-text text-muted">Srum Master</p>
                             <a href="#" class="social twitter m-2">
                                 <i class="fab fa-github text-danger"></i>
@@ -358,7 +352,7 @@
                     <div class="card">
                         <img class="card-img-top shadow" src="https://user-images.githubusercontent.com/65203105/172616017-3fbf0236-6d48-4be1-8ace-23831e5fcf2f.jpeg" alt="Profile">
                         <div class="card-body text-center">
-                            <h4 class="card-title">Ricardo Manuel Maga√±a Calva</h4>
+                            <h4 class="card-title">Ricardo Manuel MagaÒa Calva</h4>
                             <p class="card-text text-muted">Product Owner</p>
                             <a href="#" class="social twitter m-2">
                                 <i class="fab fa-github text-danger"></i>
@@ -382,7 +376,7 @@
                     <div class="card">
                         <img class="card-img-top shadow" src="https://user-images.githubusercontent.com/65203105/172616011-bb7952d2-0f3e-4181-8c98-db87e01ed454.jpeg" alt="Profile">
                         <div class="card-body text-center">
-                            <h4 class="card-title">Uriel G√≥mez Becerril</h4>
+                            <h4 class="card-title">Uriel Gomez Becerril</h4>
                             <p class="card-text text-muted">Developer</p>
                             <a href="#" class="social twitter m-2">
                                 <i class="fab fa-github text-danger"></i>
@@ -435,8 +429,8 @@
                 <h3><strong>Acerca de Nosotros</strong></h3>
                 <p>Somos una empresa nacida en 2021, creada por 3 estudiantes que buscan generar
                     los productos de mas alta calidad y accesibilidad en nuestro pais. En Heart-Designs busamos
-                    ayudar a los sectores mas vulnerables poniendo en sus manos tecnolog√≠as sensillas y accesibles
-                    para darles un apoyo m√°s en su salud diaria.</p>
+                    ayudar a los sectores mas vulnerables poniendo en sus manos tecnologÌ≠as sensillas y accesibles
+                    para darles un apoyo m·s en su salud diaria.</p>
                 <p class="text-h3">
                     <a href="#">
                         <i class="fab fa-twitter text-danger" aria-hidden="true"></i>
@@ -458,7 +452,7 @@
         </div>
         <div class="row mt-5">
             <div class="col text-center">
-                ¬© 2022 Heart-Design. All Rights Reserved
+                © 2022 Heart-Design. All Rights Reserved
             </div>
         </div>
     </div>

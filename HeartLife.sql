@@ -1,4 +1,3 @@
-drop database HeartLife;
 create database HeartLife;
 use HeartLife;
 create table userh (
@@ -128,5 +127,7 @@ begin
 end $$
 delimiter $$
 delimiter ;
+ 
+SET GLOBAL max_allowed_packet=1073741824;
 
-select * from userh;
+show VARIABLES like "max%";
